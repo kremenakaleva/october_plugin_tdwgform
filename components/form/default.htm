@@ -1,0 +1,321 @@
+<form method="post" data-request="{{__SELF__}}::onSubmit" data-request-files data-request-flash  enctype="multipart/form-data">
+	<input type="hidden" name="_handler" value="onSubmit">
+	{{ form_token() }}
+	{{ form_sessionKey() }}
+	<div class="row ui form" id="tdwg">
+		<div class="col-xs">
+			<div class="row middle-xs">
+				<div class="col-xs-12 col-sm-8">
+					<h1>
+						Here will be the form title
+					</h1>
+					<h3>Here will be the form intro text</h3>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-xs">
+					<div class="alert alert-danger" data-validate-error="">
+						<p data-message="" class="flash-message static error"></p>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-4 col-xs-12 field" id="registration_request_field">
+					<label for="type"><p>Registration request<span class="required">*</span></p></label>
+					<select id="type" name="type" required>
+						<option value="">-- Choose --</option>
+						<option value="physical" id="physical">Physical attendance</option>
+						<option value="virtual" id="virtial">Online attendance</option>
+					</select>
+				</div>
+
+			</div>
+			<div class="row box">
+				<div class="col-md-4 col-xs-12 field">
+
+					<div class="field">
+						<label for="prefix"><p>Prefix<span class="required">*</span></p></label>
+						<input type="text" id="prefix" name="prefix" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-4 col-xs-12 field">
+
+					<div class="field">
+						<label for="first_name"><p>First name<span class="required">*</span></p></label>
+						<input type="text" id="first_name" name="first_name" value="" required>
+					</div>
+				</div>
+				<div class="col-md-4 col-xs-12 field">
+
+					<div class="field">
+						<label for="middle_name"><p>Middle name</p></label>
+						<input type="text" id="middle_name" name="middle_name" value="">
+					</div>
+				</div>
+				<div class="col-md-4 col-xs-12 field">
+
+					<div class="field">
+						<label for="last_name"><p>Last name<span class="required">*</span></p></label>
+						<input type="text" id="last_name" name="last_name" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-4 col-xs-12 field">
+
+					<div class="field">
+						<label for="suffix"><p>Suffix (e.g. Jr., PhD, MD, etc.)</p></label>
+						<input type="text" id="suffix" name="suffix" value="">
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="first_name_tag"><p>Name tag - first name</p></label>
+						<input type="text" id="first_name_tag" name="first_name_tag" value="">
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="last_name_tag"><p>Name tag - last name</p></label>
+						<input type="text" id="last_name_tag" name="last_name_tag" value="">
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="institution"><p>School / Institution / Company</p></label>
+						<input type="text" id="institution" name="institution" value="">
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="title"><p>Title</p></label>
+						<input type="text" id="title" name="title" value="">
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="email"><p>Email<span class="required">*</span></p></label>
+						<input type="text" id="email" name="email" value="" required>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="verify_email"><p>Verify email<span class="required">*</span></p></label>
+						<input type="text" id="verify_email" name="verify_email" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="phone"><p>Phone</p></label>
+						<input type="text" id="phone" name="phone" value="">
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="fax"><p>Fax</p></label>
+						<input type="text" id="fax" name="fax" value="">
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-12 col-xs-12 field">
+
+					<div class="field">
+						<label for="address"><p>Address<span class="required">*</span></p></label>
+						<input type="text" id="address" name="address" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="city"><p>City<span class="required">*</span></p></label>
+						<input type="text" id="city" name="city" value="" required>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="region"><p>State / Province / Region<span class="required">*</span></p></label>
+						<input type="text" id="region" name="region" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+					<div class="field">
+						<label for="postal_code"><p>Zip / Postal Code<span class="required">*</span></p></label>
+						<input type="text" id="postal_code" name="postal_code" value="" required>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="country"><p>Country<span class="required">*</span></p></label>
+						<select id="country" name="country" required>
+							<option value="">-- Choose country --</option>
+							{% for country in countries %}
+							<option value="{{ country.id }}">{{ country.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="emergency_contact_name"><p>Emergency contact name<span class="required">*</span></p></label>
+						<input type="text" id="emergency_contact_name" name="emergency_contact_name" value="" required>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="emergency_contact_phone"><p>Emergency contact phone<span class="required">*</span></p></label>
+						<input type="text" id="emergency_contact_phone" name="emergency_contact_phone" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-12 col-xs-12 field">
+
+					<div class="field">
+						<label for="comments"><p>Comments (use this textbox to specify any concerns, general comments, or special needs (e.g. dietary, disability, etc.)</p></label>
+						<textarea name="comments" id="comments" cols="" rows="12"></textarea>
+						<script>
+							// instance, using default configuration.
+							CKEDITOR.replace( 'comments' );
+
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field" id="discount_options_field">
+					<label for="discount_options"><p>Ticket type</p></label>
+					<select id="discount_options" name="discount_options" required>
+						<option value="">-- Choose --</option>
+						{% for option in discount_options %}
+						<option value="{{ option.id }}" id="ticket_{{ option.id }}">{{ option.name }} - {{ option.amount }} {{ option.currency }}</option>
+						{% endfor %}
+					</select>
+
+
+				</div>
+				<div class="col-md-6 col-xs-12 field" id="members_code_field">
+
+					<label for="discount_code"><p>Members code</p></label>
+					<input type="text" id="discount_code" name="discount_code" value="">
+				</div>
+			</div>
+
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field" id="members_code_field">
+					<label for="accompanying_person"><p>Accompanying person - 120 &euro;</p></label>
+					<!-- Rounded switch -->
+					<label class="switch">
+						<input type="checkbox" name="accompanying_person" value="1">
+						<span class="slider round"></span>
+					</label>
+				</div>
+				<div class="col-md-6 col-xs-12 field" id="discount_options_field">
+					<label for="help_others"><p>Help others: I want to help by donating funds to be used to help cover registrations for others who need support. - 25 &euro;</p></label>
+					<!-- Rounded switch -->
+					<label class="switch">
+						<input type="checkbox" name="help_others" value="1">
+						<span class="slider round"></span>
+					</label>
+				</div>
+			</div>
+
+			<div class="row box">
+				<div class="col-md-12 col-xs-12 field" id="payment_options_field">
+					<label for="payment_options"><p>Payment options<span class="required">*</span></p></label>
+						<label><input name="payment_options[]" type="radio" value="pay_now" required>Pay now (Payment card, PayPal)</label>
+						<label><input name="payment_options[]" type="radio" value="group_invoice" required>I want this registration to be added to a group invoice and pay later at once</label>
+				</div>
+			</div>
+			<div id="group_invoice_fields" style="display: none;">
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+
+						<div class="field">
+							<label for="group_members_list"><p>List of people who will register and should be added to the same invoice<span class="required">*</span></p></label>
+							<textarea name="group_members_list" id="group_members_list" cols="" rows="12"></textarea>
+							<script>
+								// instance, using default configuration.
+								CKEDITOR.replace( 'group_members_list' );
+
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+
+						<div class="field">
+							<label for="billing_details"><p>Billing details (company name, VAT number, address, country)<span class="required">*</span></p></label>
+							<textarea name="billing_details" id="billing_details" cols="" rows="12"></textarea>
+							<script>
+								// instance, using default configuration.
+								CKEDITOR.replace( 'billing_details' );
+
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+
+						<div class="field">
+							<label for="invoice_email"><p>Send invoice to the following email<span class="required">*</span></p></label>
+							<input type="text" id="invoice_email" name="invoice_email" value="">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+					<div class="row center-xs">
+						<div class="col-md-12 col-xs-12 field">
+							<div class="g-recaptcha" data-sitekey="{{__SELF__.property('recaptcha_key')}}"></div>
+						</div>
+					</div>
+
+					<div class="row center-xs">
+						<div class="col-xs-12 col-md-3">
+							<input type="submit" name="tAction" value="Submit" class="btn btn-primary">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>
+
+{% framework extras %}
+{% scripts %}

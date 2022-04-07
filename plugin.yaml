@@ -1,0 +1,24 @@
+plugin:
+    name: 'pensoft.tdwgform::lang.plugin.name'
+    description: 'pensoft.tdwgform::lang.plugin.description'
+    author: Pensoft
+    icon: oc-icon-building-o
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'TDWG Form'
+        url: pensoft/tdwgform/data
+        icon: icon-building-o
+        sideMenu:
+            side-menu-item:
+                label: 'Form data'
+                url: pensoft/tdwgform/data
+                icon: icon-align-justify
+            side-menu-item2:
+                label: 'Ticket types'
+                url: pensoft/tdwgform/discountoptions
+                icon: icon-euro
+            side-menu-item3:
+                label: Products
+                url: pensoft/tdwgform/products
+                icon: icon-sitemap

@@ -1,0 +1,13 @@
+columns:
+    id:
+        label: id
+        type: number
+    name:
+        label: name
+        type: text
+    amount:
+        label: 'In person amount'
+        type: text
+    amount_virtual:
+        label: 'Virtual amount'
+        type: text

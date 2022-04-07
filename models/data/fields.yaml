@@ -1,0 +1,137 @@
+fields:
+    type:
+        label: 'Attendance type'
+        span: auto
+        type: text
+    prefix:
+        label: Prefix
+        span: auto
+        type: text
+    suffix:
+        label: Suffix
+        span: auto
+        type: text
+    first_name:
+        label: 'First name'
+        span: auto
+        type: text
+    middle_name:
+        label: 'Middle name'
+        span: auto
+        type: text
+    last_name:
+        label: 'Last name'
+        span: auto
+        type: text
+    first_name_tag:
+        label: 'First name tag'
+        span: auto
+        type: text
+    last_name_tag:
+        label: 'Last name tag'
+        span: auto
+        type: text
+    institution:
+        label: Institution
+        span: auto
+        type: text
+    title:
+        label: Title
+        span: auto
+        type: text
+    email:
+        label: Email
+        span: auto
+        type: text
+    phone:
+        label: Phone
+        span: auto
+        type: text
+    fax:
+        label: Fax
+        span: auto
+        type: text
+    country:
+        label: Country
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    city:
+        label: City
+        span: auto
+        type: text
+    region:
+        label: Region
+        span: auto
+        type: text
+    postal_code:
+        label: 'Postal code'
+        span: auto
+        type: text
+    address:
+        label: Address
+        size: large
+        span: full
+        type: richeditor
+    emergency_contact_name:
+        label: 'Emergency contact name'
+        span: auto
+        type: text
+    emergency_contact_phone:
+        label: 'Emergency contact phone'
+        span: auto
+        type: text
+    accompanying_person:
+        label: 'Accompayning person'
+        span: auto
+        type: switch
+    help_others:
+        label: 'Help others'
+        span: auto
+        type: switch
+    comments:
+        label: Comments
+        size: large
+        span: auto
+        type: richeditor
+tabs:
+    fields:
+        payment_options:
+            label: 'Payment option'
+            options:
+                'Pay now': 'Pay now'
+                'Group invoice': 'Group invoice'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: Payment
+        invoice_email:
+            label: 'Invoice email'
+            span: auto
+            type: text
+            tab: Payment
+        billing_details:
+            label: 'Billing details'
+            size: large
+            span: auto
+            type: richeditor
+            tab: Payment
+        invoice_group_members:
+            label: 'Invoice group members info'
+            size: large
+            span: auto
+            type: richeditor
+            tab: Payment
+        discount_option:
+            label: 'Ticket'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Ticket
+        discount_code:
+            label: 'Discount code'
+            span: auto
+            type: text
+            tab: Ticket

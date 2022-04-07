@@ -1,0 +1,10 @@
+name: DiscountOptions
+form: $/pensoft/tdwgform/models/discountoptions/fields.yaml
+modelClass: Pensoft\Tdwgform\Models\DiscountOptions
+defaultRedirect: pensoft/tdwgform/discountoptions
+create:
+    redirect: 'pensoft/tdwgform/discountoptions/update/:id'
+    redirectClose: pensoft/tdwgform/discountoptions
+update:
+    redirect: pensoft/tdwgform/discountoptions
+    redirectClose: pensoft/tdwgform/discountoptions

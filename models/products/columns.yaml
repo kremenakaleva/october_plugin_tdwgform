@@ -1,0 +1,33 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    name:
+        label: name
+        type: text
+        searchable: true
+        sortable: true
+    product_id:
+        label: product_id
+        type: text
+        searchable: true
+        sortable: true
+    ticket:
+        label: ticket
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: ticket
+    type:
+        label: type
+        type: text
+        searchable: true
+        sortable: true
+    early_booking_date:
+        label: early_booking_date
+        type: text
+        searchable: true
+        sortable: true

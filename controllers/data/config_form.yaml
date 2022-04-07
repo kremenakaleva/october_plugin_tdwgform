@@ -1,0 +1,10 @@
+name: Data
+form: $/pensoft/tdwgform/models/data/fields.yaml
+modelClass: Pensoft\Tdwgform\Models\Data
+defaultRedirect: pensoft/tdwgform/data
+create:
+    redirect: 'pensoft/tdwgform/data/update/:id'
+    redirectClose: pensoft/tdwgform/data
+update:
+    redirect: pensoft/tdwgform/data
+    redirectClose: pensoft/tdwgform/data

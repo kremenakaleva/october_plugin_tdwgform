@@ -1,0 +1,10 @@
+name: Products
+form: $/pensoft/tdwgform/models/products/fields.yaml
+modelClass: Pensoft\Tdwgform\Models\Products
+defaultRedirect: pensoft/tdwgform/products
+create:
+    redirect: 'pensoft/tdwgform/products/update/:id'
+    redirectClose: pensoft/tdwgform/products
+update:
+    redirect: pensoft/tdwgform/products
+    redirectClose: pensoft/tdwgform/products

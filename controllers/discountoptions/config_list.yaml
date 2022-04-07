@@ -1,0 +1,12 @@
+list: $/pensoft/tdwgform/models/discountoptions/columns.yaml
+modelClass: Pensoft\Tdwgform\Models\DiscountOptions
+title: DiscountOptions
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'pensoft/tdwgform/discountoptions/update/:id'

@@ -1,0 +1,20 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    currency:
+        label: Currency
+        options:
+            €: €
+        showSearch: true
+        span: auto
+        type: dropdown
+    amount:
+        label: 'Amount in person'
+        span: auto
+        type: text
+    amount_virtual:
+        label: 'Amount virtual'
+        span: auto
+        type: text

@@ -1,0 +1,40 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    product_id:
+        label: 'Product id'
+        span: auto
+        type: number
+    ticket:
+        label: Ticket
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    type:
+        label: 'Attendance type'
+        options:
+            physical: physical
+            virtual: virtual
+        showSearch: true
+        span: auto
+        type: dropdown
+    early_booking_date:
+        label: 'Early booking date'
+        span: auto
+        type: datepicker
+    regular:
+        label: Regular
+        span: auto
+        type: switch
+        comment: 'ON - Regular; OFF- Early'
+    accompanying_person:
+        label: 'Accompanying person'
+        span: auto
+        type: switch
+    help_others:
+        label: 'Help others'
+        span: auto
+        type: switch

@@ -1,0 +1,12 @@
+list: $/pensoft/tdwgform/models/data/columns.yaml
+modelClass: Pensoft\Tdwgform\Models\Data
+title: Data
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'pensoft/tdwgform/data/update/:id'
