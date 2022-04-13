@@ -1,0 +1,21 @@
+fields:
+    code:
+        label: Code
+        span: auto
+        type: text
+    value:
+        label: Value
+        span: auto
+        type: number
+    type:
+        label: Type
+        options:
+            €: €
+            '%': '%'
+        showSearch: true
+        span: auto
+        type: dropdown
+    is_used:
+        label: 'Is used'
+        span: auto
+        type: switch

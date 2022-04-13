@@ -1,0 +1,13 @@
+columns:
+    code:
+        label: code
+        type: text
+    value:
+        label: value
+        type: number
+    type:
+        label: type
+        type: text
+    is_used:
+        label: is_used
+        type: switch

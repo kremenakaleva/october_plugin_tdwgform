@@ -21,4 +21,8 @@ navigation:
             side-menu-item3:
                 label: Products
                 url: pensoft/tdwgform/products
-                icon: icon-sitemap
+                icon: icon-barcode
+            side-menu-item4:
+                label: 'Discount codes'
+                url: pensoft/tdwgform/codes
+                icon: icon-qrcode

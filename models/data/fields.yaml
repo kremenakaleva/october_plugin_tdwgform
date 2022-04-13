@@ -28,7 +28,7 @@ fields:
         span: auto
         type: text
     last_name_tag:
-        label: 'Last name tag'
+        label: Affiliation
         span: auto
         type: text
     institution:
@@ -51,12 +51,10 @@ fields:
         label: Fax
         span: auto
         type: text
-    country:
-        label: Country
-        nameFrom: name
-        descriptionFrom: description
+    address:
+        label: Address
         span: auto
-        type: relation
+        type: text
     city:
         label: City
         span: auto
@@ -69,11 +67,12 @@ fields:
         label: 'Postal code'
         span: auto
         type: text
-    address:
-        label: Address
-        size: large
-        span: full
-        type: richeditor
+    country:
+        label: Country
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
     emergency_contact_name:
         label: 'Emergency contact name'
         span: auto
@@ -100,8 +99,8 @@ tabs:
         payment_options:
             label: 'Payment option'
             options:
-                'Pay now': 'Pay now'
-                'Group invoice': 'Group invoice'
+                pay_now: 'Pay now'
+                group_invoice: 'Group invoice'
             showSearch: true
             span: auto
             type: dropdown
@@ -124,7 +123,7 @@ tabs:
             type: richeditor
             tab: Payment
         discount_option:
-            label: 'Ticket'
+            label: Ticket
             nameFrom: name
             descriptionFrom: description
             span: auto

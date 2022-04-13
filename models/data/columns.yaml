@@ -73,3 +73,6 @@ columns:
         type: text
         searchable: true
         sortable: true
+    submission_completed:
+        label: 'Submission completed'
+        type: switch

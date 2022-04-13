@@ -1,0 +1,10 @@
+name: Codes
+form: $/pensoft/tdwgform/models/codes/fields.yaml
+modelClass: Pensoft\Tdwgform\Models\Codes
+defaultRedirect: pensoft/tdwgform/codes
+create:
+    redirect: 'pensoft/tdwgform/codes/update/:id'
+    redirectClose: pensoft/tdwgform/codes
+update:
+    redirect: pensoft/tdwgform/codes
+    redirectClose: pensoft/tdwgform/codes

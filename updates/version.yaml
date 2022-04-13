@@ -45,3 +45,15 @@
 1.0.16:
     - 'Updated table pensoft_tdwgform_products'
     - builder_table_update_pensoft_tdwgform_products_4.php
+1.0.17:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_7.php
+1.0.18:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_8.php
+1.0.19:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_9.php
+1.0.20:
+    - 'Created table pensoft_tdwgform_codes'
+    - builder_table_create_pensoft_tdwgform_codes.php
