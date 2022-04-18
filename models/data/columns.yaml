@@ -24,23 +24,11 @@ columns:
         type: text
         searchable: true
         sortable: true
-    institution:
-        label: Institution
-        type: text
-        searchable: true
-        sortable: true
     email:
         label: Email
         type: text
         searchable: true
         sortable: true
-    country_id:
-        label: Country
-        type: text
-        searchable: true
-        sortable: true
-        select: name
-        relation: country
     payment_options:
         label: Payment
         type: text
@@ -65,14 +53,26 @@ columns:
         relation: discount_option
     accompanying_person:
         label: 'Accompaining person'
-        type: text
+        type: switch
         searchable: true
         sortable: true
     help_others:
         label: 'Help others'
-        type: text
+        type: switch
         searchable: true
         sortable: true
     submission_completed:
         label: 'Submission completed'
         type: switch
+        searchable: true
+        sortable: true
+    accompanying_person_has_invoice:
+        label: 'Extra invoice for accomp. person'
+        type: switch
+        searchable: true
+        sortable: true
+    help_others_has_invoice:
+        label: 'Extra invoice for donation'
+        type: switch
+        searchable: true
+        sortable: true

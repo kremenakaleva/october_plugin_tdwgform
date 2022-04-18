@@ -101,6 +101,7 @@ tabs:
             options:
                 pay_now: 'Pay now'
                 group_invoice: 'Group invoice'
+                extra_invoice: 'Extra invoice'
             showSearch: true
             span: auto
             type: dropdown
@@ -121,6 +122,16 @@ tabs:
             size: large
             span: auto
             type: richeditor
+            tab: Payment
+        accompanying_person_has_invoice:
+            label: 'Accompanyng person extra invoice'
+            span: auto
+            type: switch
+            tab: Payment
+        help_others_has_invoice:
+            label: 'Help others extra invoice'
+            span: auto
+            type: switch
             tab: Payment
         discount_option:
             label: Ticket

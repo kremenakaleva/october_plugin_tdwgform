@@ -34,6 +34,22 @@
 
 			</div>
 			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="email"><p>Email<span class="required">*</span></p></label>
+						<input type="text" id="email" name="email" value="{{data.email}}" required>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="verify_email"><p>Verify email<span class="required">*</span></p></label>
+						<input type="text" id="verify_email" name="verify_email" value="{{data.email}}" required>
+					</div>
+				</div>
+			</div>
+			<div class="row box">
 				<div class="col-md-4 col-xs-12 field">
 
 					<div class="field">
@@ -97,32 +113,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="row box">
-				<div class="col-md-6 col-xs-12 field">
 
-					<div class="field">
-						<label for="email"><p>Email<span class="required">*</span></p></label>
-						<input type="text" id="email" name="email" value="{{data.email}}" required>
-					</div>
-				</div>
-				<div class="col-md-6 col-xs-12 field">
 
-					<div class="field">
-						<label for="verify_email"><p>Verify email<span class="required">*</span></p></label>
-						<input type="text" id="verify_email" name="verify_email" value="{{data.email}}" required>
-					</div>
-				</div>
-			</div>
-			<div class="row box">
-				<div class="col-md-6 col-xs-12 field">
-
-					<div class="field">
-						<label for="phone"><p>Phone</p></label>
-						<input type="text" id="phone" name="phone" value="{{data.phone}}">
-					</div>
-				</div>
-
-			</div>
 			<div class="row box">
 				<div class="col-md-12 col-xs-12 field">
 
@@ -176,6 +168,16 @@
 						</select>
 					</div>
 				</div>
+			</div>
+			<div class="row box">
+				<div class="col-md-6 col-xs-12 field">
+
+					<div class="field">
+						<label for="phone"><p>Phone</p></label>
+						<input type="text" id="phone" name="phone" value="{{data.phone}}">
+					</div>
+				</div>
+
 			</div>
 			<div class="row box">
 				<div class="col-md-6 col-xs-12 field">
@@ -239,6 +241,13 @@
 				<div class="col-md-6 col-xs-12 field" id="accompanying_person_name_field">
 					<label for="accompanying_person_name"><p>Accompanying person name</p></label>
 					<input type="text" id="accompanying_person_name" name="accompanying_person_name" value="{{data.accompanying_person_name}}">
+					<br>
+					<label for="accompanying_person_has_invoice"><p>I want an extra invoice for the accompanying person</p></label>
+					<!-- Rounded switch -->
+					<label class="switch">
+						<input type="checkbox" name="accompanying_person_has_invoice" id="accompanying_person_has_invoice_field" value="1" {% if (data.accompanying_person_has_invoice == 1) %} checked {% endif %}>
+						<span class="slider round"></span>
+					</label>
 				</div>
 			</div>
 
@@ -247,9 +256,19 @@
 					<label for="help_others"><p>Help others: I want to help by donating funds to be used to help cover registrations for others who need support. - 25 &euro;</p></label>
 					<!-- Rounded switch -->
 					<label class="switch">
-						<input type="checkbox" name="help_others" value="1" {% if (data.help_others == 1) %} checked {% endif %}>
+						<input type="checkbox" name="help_others" value="1" id="help_others_field" {% if (data.help_others == 1) %} checked {% endif %}>
 						<span class="slider round"></span>
 					</label>
+					<div id="help_others_has_invoice_field_container">
+						<br>
+						<label for="help_othersn_has_invoice"><p>I want an extra invoice for the donating funds</p></label>
+						<br>
+						<!-- Rounded switch -->
+						<label class="switch">
+							<input type="checkbox" name="help_others_has_invoice" id="help_others_has_invoice_field" value="1" {% if (data.help_others_has_invoice == 1) %} checked {% endif %}>
+							<span class="slider round"></span>
+						</label>
+					</div>
 				</div>
 			</div>
 
@@ -257,7 +276,7 @@
 				<div class="col-md-12 col-xs-12 field" id="payment_options_field">
 					<label for="payment_options"><p>Payment options<span class="required">*</span></p></label>
 						<label><input name="payment_options[]" type="radio" value="pay_now" {% if (data.payment_options == "pay_now") %} checked {% endif %} required>Pay now (Bank card, PayPal)</label>
-						<label><input name="payment_options[]" type="radio" value="group_invoice" {% if (data.payment_options == "group_invoice") %} checked {% endif %} required>I need a group invoice (payment due on receipt by Bank card, PayPal)</label>
+						<label><input name="payment_options[]" type="radio" value="group_invoice" {% if (data.payment_options == "group_invoice") %} checked {% endif %} required>Pay later (group invoice or extra invoice, payment due on receipt by Bank card, PayPal)</label>
 				</div>
 			</div>
 			<div id="group_invoice_fields" style="display: none;">

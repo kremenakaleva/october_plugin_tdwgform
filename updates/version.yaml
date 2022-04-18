@@ -57,3 +57,9 @@
 1.0.20:
     - 'Created table pensoft_tdwgform_codes'
     - builder_table_create_pensoft_tdwgform_codes.php
+1.0.21:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_10.php
+1.0.22:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_11.php

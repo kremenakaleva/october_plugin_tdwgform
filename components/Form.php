@@ -111,6 +111,8 @@ class Form extends ComponentBase {
         $accompayning_person = \Input::get('accompanying_person');
 		$accompanying_person_name = \Input::get('accompanying_person_name');
         $help_others = \Input::get('help_others');
+        $accompanying_person_has_invoice = \Input::get('accompanying_person_has_invoice');
+        $help_others_has_invoice = \Input::get('help_others_has_invoice');
 
         $validator = Validator::make(
             [
@@ -243,6 +245,8 @@ class Form extends ComponentBase {
             $data->accompanying_person = ($type == 'virtual') ? null : (int)$accompayning_person;
             $data->help_others = (int)$help_others;
 			$data->accompanying_person_name = ($type == 'virtual') ? null : $accompanying_person_name;
+			$data->accompanying_person_has_invoice = ($type == 'virtual' || !(int)$accompayning_person) ? null : $accompanying_person_has_invoice;
+			$data->help_others_has_invoice = (!(int)$help_others) ? null : $help_others_has_invoice;
 
             $data->save();
 
@@ -331,15 +335,19 @@ class Form extends ComponentBase {
                     'first_name' => $data->first_name,
                     'middle_name' => $data->middle_name,
                     'last_name' => $data->last_name,
-                    'institution' => $data->institution,
+                    'affiliation' => $data->last_name_tag,
                     'city' => $data->city,
+                    'region' => $data->region,
                     'country' => $data->country,
                     'postal_code' => $data->postal_code,
                     'address' => $data->address,
+                    'address2' => $data->address2,
                     'phone' => $data->phone,
                     'invoice_group_members' => $data->invoice_group_members,
                     'billing_details' => $data->billing_details,
                     'invoice_email' => $data->invoice_email,
+                    'group_members_list' => $data->group_members_list,
+                    'comments' => $data->comments,
                 ];
                 $json = json_encode($data, true);
 
@@ -360,6 +368,7 @@ class Form extends ComponentBase {
                 }
 
                 $response = json_decode($httpResponse->body, true);
+
                 if(!is_array($response)) {
                     throw new \ApplicationException('Pensoft API error. Invalid response.');
                 }
@@ -380,7 +389,7 @@ class Form extends ComponentBase {
 			$saveData->save();
 
 			//mark code as used
-			if($data->discount_code){
+			if(isset($data->discount_code) && $data->discount_code){
 				$code = Codes::where('code', $data->discount_code)->first();
 				$code->is_used = true;
 				$code->save();
@@ -425,8 +434,7 @@ class Form extends ComponentBase {
 
 	private function normalizeTelephoneNumber(string $telephone): string {
 		//remove white space, dots, hyphens and brackets
-		$telephone = str_replace([' ', '.', '-', '(', ')'], '', $telephone);
-		return $telephone;
+        return str_replace([' ', '.', '-', '(', ')'], '', $telephone);
 	}
 
 	private function isDigits(string $s, int $minDigits = 9, int $maxDigits = 14): bool {
