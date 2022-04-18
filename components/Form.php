@@ -133,7 +133,7 @@ class Form extends ComponentBase {
                 'billing_details' => $billing_details,
                 'invoice_email' => $invoice_email,
                 'discount_options' => $discount_options,
-//				'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
+				'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
             ],
             [
                 'type' => 'required|string',
@@ -153,10 +153,10 @@ class Form extends ComponentBase {
                 'group_members_list' => 'required_if:payment_options,group_invoice,string',
                 'billing_details' => 'required_if:payment_options,group_invoice,string',
                 'invoice_email' => 'required_if:payment_options,group_invoice,email',
-//				'g-recaptcha-response' => [
-//					'required',
-//					new RecaptchaValidator\,
-//				],
+				'g-recaptcha-response' => [
+					'required',
+					new RecaptchaValidator(),
+				],
             ]
         );
 
