@@ -65,3 +65,5 @@
     - builder_table_update_pensoft_tdwgform_data_11.php
 1.0.64:
     - 'Updated table pensoft_tdwgform_data'
+1.0.66:
+    - 'Fix'

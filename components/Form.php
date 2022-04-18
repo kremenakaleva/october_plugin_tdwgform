@@ -52,7 +52,7 @@ class Form extends ComponentBase {
     }
 
     public function discount_options() {
-        return DiscountOptions::get();
+        return DiscountOptions::orderBy('id', 'asc')->get();
     }
 
     public function onTicketsList() {
