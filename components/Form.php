@@ -74,6 +74,10 @@ class Form extends ComponentBase {
         return ['result' => 0];
     }
 
+    public function onCheckEarlyBookingDate() {
+		return ['result' => Carbon::now() <= env('EARLY_BOOKING_DATE')];
+    }
+
     public function onSubmit() {
         $registration_id = \Input::get('registration_id');
         $emailValidationRule = 'required|between:6,255|email|unique:pensoft_tdwgform_data,email';
@@ -291,21 +295,20 @@ class Form extends ComponentBase {
 
     public function onPaymentProceed() {
         $ID = (int)post('ID');
-        $data = Data::where('id', $ID)->first();
-        $discount_options = $data->discount_option_id;
-        $type = $data->type;
-        $accompayning_person = $data->accompanying_person;
-        $help_others = $data->help_others;
-        $discount_code = $data->discount_code;
-        $email = $data->email;
-
-		//TODOD
 
         if($ID) {
+			$item = $data = Data::where('id', $ID)->first();
+			$discount_options = $data->discount_option_id;
+			$type = $data->type;
+			$accompayning_person = $data->accompanying_person;
+			$help_others = $data->help_others;
+			$discount_code = $data->discount_code;
+			$email = $data->email;
+
             $products = [];
             $product_1 = Products::where('ticket_id', (int)$discount_options)
                 ->where('type', $type)
-                ->whereRaw('regular = CASE WHEN (early_booking_date >= now() AND type = \'physical\') THEN false ELSE true END')
+                ->whereRaw('regular = CASE WHEN (\'' . env('EARLY_BOOKING_DATE') . '\' >= now() AND type = \'physical\' AND ticket_id = 1) THEN false ELSE true END')
                 ->where('accompanying_person', 'false')
                 ->where('help_others', 'false')
                 ->first();
@@ -369,6 +372,8 @@ class Form extends ComponentBase {
 
                 $response = json_decode($httpResponse->body, true);
 
+				$link = $response['uri'] ? $response['uri'] : '';
+
                 if(!is_array($response)) {
                     throw new \ApplicationException('Pensoft API error. Invalid response.');
                 }
@@ -378,42 +383,50 @@ class Form extends ComponentBase {
                 if(!isset($response['uri']) || !is_string($response['uri'])) {
                     throw new \ApplicationException('Pensoft API did not respond with a proper URI.');
                 }
+
+				$saveData = Data::where('id', (int)$ID)->where('submission_completed', false)->first();
+				$saveData->submission_completed = 'true';
+				$saveData->save();
+
+				//mark code as used
+				if(isset($item->discount_code) && $item->discount_code){
+					$code = Codes::where('code', $item->discount_code)->first();
+					$code->is_used = true;
+					$code->save();
+				}
+
+				//SEND MAIL
+				$settings = MailSetting::instance();
+				$vars = [
+					'full_name' => $item->prefix . ' ' . $item->first_name . ' ' . $item->middle_name . ' ' . $item->last_name . ' ' . $item->suffix,
+					'link' => $link,
+				];
+				if($item->payment_options == 'group_invoice' && $item->invoice_email){
+					Mail::send('pensoft.tdgw::mail.finish_tdwg_registration_with_group_invoice', $vars, function($message) use ($item, $settings) {
+						$message->to($item->email, $item->full_name);
+						$message->from($settings->sender_email, $settings->sender_name);
+						$message->replyTo($settings->sender_email, $settings->sender_name);
+					});
+
+					if (count(Mail::failures()) > 0){
+						Flash::error('Mail not sent');
+						return;
+					}
+					return \Redirect::to('/');
+				}else{
+					Mail::send('pensoft.tdgw::mail.finish_tdwg_registration_with_payment', $vars, function($message) use ($item, $settings) {
+						$message->to($item->email, $item->full_name);
+						$message->from($settings->sender_email, $settings->sender_name);
+						$message->replyTo($settings->sender_email, $settings->sender_name);
+					});
+
+					if (count(Mail::failures()) > 0){
+						Flash::error('Mail not sent');
+						return;
+					}
+					return \Redirect::to($link);
+				}
             }
-
-//            $entry = Entry::where('id', env('TDWG_ID'))->first();
-//            Flash::success($entry->thank_you_message); //TODO
-
-
-			$saveData = Data::where('id', (int)$ID)->where('submission_completed', false)->first();
-			$saveData->submission_completed = 'true';
-			$saveData->save();
-
-			//mark code as used
-			if(isset($data->discount_code) && $data->discount_code){
-				$code = Codes::where('code', $data->discount_code)->first();
-				$code->is_used = true;
-				$code->save();
-			}
-
-
-			//SEND MAIL
-			$settings = MailSetting::instance();
-			$vars = [
-				'full_name' => $data->prefix . ' ' . $data->first_name . ' ' . $data->middle_name . ' ' . $data->last_name . ' ' . $data->suffix,
-				'link' => 'https://pensoft.net',
-			];
-			Mail::send('pensoft.tdgw::mail.finish_tdwg_registration_with_payment', $vars, function($message) use ($data, $settings) {
-				$message->to($data->email, $data->full_name);
-				$message->from($settings->sender_email, $settings->sender_name);
-				$message->replyTo($settings->sender_email, $settings->sender_name);
-			});
-
-			if (count(Mail::failures()) > 0){
-				Flash::error('Mail not sent');
-				return;
-			}
-
-			return \Redirect::to('/');
         }
     }
 

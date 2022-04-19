@@ -215,11 +215,10 @@
 					<select id="discount_options" name="discount_options" required>
 						<option value="">-- Choose --</option>
 						{% for option in discount_options %}
-						<option value="{{ option.id }}" id="ticket_{{ option.id }}" {% if (data.discount_option_id == option.id) %} selected {% endif %}>{{ option.name }} - {{ option.amount }} {{ option.currency }}</option>
+							<option value="{{ option.id }}" id="ticket_{{ option.id }}" {% if (data.discount_option_id == option.id) %} selected {% endif %}>{{ option.name }} - {{ option.amount }} {{ option.currency }}</option>
 						{% endfor %}
 					</select>
-
-
+					<div id="ticket_type_message" class="ticket_type_message"><em>Early Registration Discount -50 &euro; will be applied</em></div>
 				</div>
 				<div class="col-md-6 col-xs-12 field" id="members_code_field">
 					<label for="discount_code"><p>Members code (case-sensitive)</p></label>
@@ -253,7 +252,7 @@
 
 			<div class="row box">
 				<div class="col-md-12 col-xs-12 field">
-					<label for="help_others"><p>Help others: I want to help by donating funds to be used to help cover registrations for others who need support. - 25 &euro;</p></label>
+					<label for="help_others"><p>Help others: I want to donate funds for those who need support for registration. - 25 &euro;</p></label>
 					<!-- Rounded switch -->
 					<label class="switch">
 						<input type="checkbox" name="help_others" value="1" id="help_others_field" {% if (data.help_others == 1) %} checked {% endif %}>
@@ -320,13 +319,7 @@
 			</div>
 
 
-
-
-					<div class="row center-xs">
-						<div class="col-md-12 col-xs-12 field">
-							<div class="g-recaptcha" data-sitekey="{{__SELF__.property('recaptcha_key')}}"></div>
-						</div>
-					</div>
+					<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
 
 					<div class="row center-xs">
 						<div class="col-xs-12 col-md-3">

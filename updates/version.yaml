@@ -67,3 +67,5 @@
     - 'Updated table pensoft_tdwgform_data'
 1.0.66:
     - 'Fix'
+1.0.67:
+    - 'Redirect mail after finish'
