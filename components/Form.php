@@ -118,6 +118,20 @@ class Form extends ComponentBase {
         $help_others = \Input::get('help_others');
         $accompanying_person_has_invoice = \Input::get('accompanying_person_has_invoice');
         $help_others_has_invoice = \Input::get('help_others_has_invoice');
+        $slack_email = \Input::get('slack_email');
+        $twitter = \Input::get('twitter');
+        $checkbox_code_of_conduct = \Input::get('checkbox_code_of_conduct');
+        $checkbox_presenting = \Input::get('checkbox_presenting');
+        $checkbox_agree = \Input::get('checkbox_agree');
+        $checkbox_media = \Input::get('checkbox_media');
+        $checkbox_optional_abstract = \Input::get('checkbox_optional_abstract');
+        $checkbox_optional_attend_welcome = \Input::get('checkbox_optional_attend_welcome');
+        $checkbox_optional_attend_excursion = \Input::get('checkbox_optional_attend_excursion');
+        $checkbox_optional_attend_conference = \Input::get('checkbox_optional_attend_conference');
+        $checkbox_optional_contacted = \Input::get('checkbox_optional_contacted');
+        $checkbox_optional_understand = \Input::get('checkbox_optional_understand');
+        $checkbox_optional_open_session = \Input::get('checkbox_optional_open_session');
+        $checkbox_optional_agree_shared = \Input::get('checkbox_optional_agree_shared');
 
         $validator = Validator::make(
             [
@@ -138,6 +152,10 @@ class Form extends ComponentBase {
                 'billing_details' => $billing_details,
                 'invoice_email' => $invoice_email,
                 'discount_options' => $discount_options,
+                'checkbox_code_of_conduct' => $checkbox_code_of_conduct,
+                'checkbox_presenting' => $checkbox_presenting,
+                'checkbox_agree' => $checkbox_agree,
+                'checkbox_media' => $checkbox_media,
 				'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
             ],
             [
@@ -158,6 +176,10 @@ class Form extends ComponentBase {
                 'group_members_list' => 'required_if:payment_options,group_invoice,string',
                 'billing_details' => 'required_if:payment_options,group_invoice,string',
                 'invoice_email' => 'required_if:payment_options,group_invoice,email',
+				'checkbox_code_of_conduct' => 'required',
+				'checkbox_presenting' => 'required',
+				'checkbox_agree' => 'required',
+				'checkbox_media' => 'required',
 				'g-recaptcha-response' => [
 					'required',
 					new RecaptchaValidator(),
@@ -213,6 +235,13 @@ class Form extends ComponentBase {
 				}
 			}
 
+			if($slack_email) {
+				if(!filter_var($slack_email, FILTER_VALIDATE_EMAIL)) {
+					$err = "Invalid email format when using Slack or Discord";
+					throw new ValidationException(['slack_email' => $err]);
+				}
+			}
+
 
             if($registration_id) {
                 $data = Data::find($registration_id);
@@ -252,6 +281,21 @@ class Form extends ComponentBase {
 			$data->accompanying_person_name = ($type == 'virtual') ? null : $accompanying_person_name;
 			$data->accompanying_person_has_invoice = ($type == 'virtual' || !(int)$accompayning_person) ? null : $accompanying_person_has_invoice;
 			$data->help_others_has_invoice = (!(int)$help_others) ? null : $help_others_has_invoice;
+
+			$data->slack_email = $slack_email;
+			$data->twitter = $twitter;
+			$data->checkbox_code_of_conduct = $checkbox_code_of_conduct;
+			$data->checkbox_presenting = $checkbox_presenting;
+			$data->checkbox_agree = $checkbox_agree;
+			$data->checkbox_media = $checkbox_media;
+			$data->checkbox_optional_abstract = $checkbox_optional_abstract;
+			$data->checkbox_optional_attend_welcome = ($type == 'virtual') ? null : $checkbox_optional_attend_welcome;
+			$data->checkbox_optional_attend_conference = ($type == 'virtual') ? null : $checkbox_optional_attend_conference;
+			$data->checkbox_optional_attend_excursion = ($type == 'virtual') ? null : $checkbox_optional_attend_excursion;
+			$data->checkbox_optional_contacted = $checkbox_optional_contacted;
+			$data->checkbox_optional_understand = ($type == 'virtual') ? null : $checkbox_optional_understand;
+			$data->checkbox_optional_open_session = $checkbox_optional_open_session;
+			$data->checkbox_optional_agree_shared = $checkbox_optional_agree_shared;
 
             $data->save();
 

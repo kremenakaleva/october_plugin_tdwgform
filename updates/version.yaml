@@ -66,8 +66,11 @@
 1.0.64:
     - 'Updated table pensoft_tdwgform_data'
 1.0.66:
-    - 'Fix'
+    - Fix
 1.0.67:
     - 'Redirect mail after finish'
 1.0.68:
     - 'Form labels fix; Redirect after finish registration.;'
+1.0.69:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_12.php
