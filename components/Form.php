@@ -160,10 +160,10 @@ class Form extends ComponentBase {
             ],
             [
                 'type' => 'required|string',
+				'email' => $emailValidationRule,
+				'verify_email' => 'required_with:email|same:email',
                 'first_name' => 'required|string|min:2',
                 'last_name' => 'required|string|min:2',
-                'email' => $emailValidationRule,
-                'verify_email' => 'required_with:email|same:email',
                 'country' => 'required|integer',
                 'city' => 'required|string',
                 'address' => 'required|string',
@@ -173,8 +173,8 @@ class Form extends ComponentBase {
                 'payment_options' => 'required',
                 'discount_code' => 'string|min:4',
                 'discount_options' => 'required|integer',
-                'group_members_list' => 'required_if:payment_options,group_invoice,string',
-                'billing_details' => 'required_if:payment_options,group_invoice,string',
+//                'group_members_list' => 'required_if:payment_options,group_invoice,string',
+//                'billing_details' => 'required_if:payment_options,group_invoice,string',
                 'invoice_email' => 'required_if:payment_options,group_invoice,email',
 				'checkbox_code_of_conduct' => 'required',
 				'checkbox_presenting' => 'required',
@@ -187,9 +187,26 @@ class Form extends ComponentBase {
             ]
         );
 
+        $errArray = [
+			"type" => "The I will attend field is required.",
+			"payment_options" => "Please choose a payment option.",
+			"discount_options" => "Please choose a ticket type.",
+			"checkbox_code_of_conduct" => "Please check the \"I have read the Code of Conduct and Terms of Use and agree to abide by them\" field.",
+			"checkbox_presenting" => "Please check the \"If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube channel\" field.",
+			"checkbox_agree" => "Please check the \"I agree to be contacted by event organizers\" field.",
+			"checkbox_media" => "Please check the \"For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or CC0\" field.",
+		];
 
-        if($validator->fails()) {
-            Flash::error($validator->messages()->first());
+
+        if($validator->fails()){
+        	foreach ($validator->messages()->toArray() as $k => $e){
+        		if(isset($errArray[$k])){
+					Flash::error($errArray[$k]);
+				}else{
+        			Flash::error($validator->messages()->first());
+				}
+				return ['scroll_to_field' => $validator->messages()->toArray()];
+			}
         } else {
 
         	// more validation
@@ -197,6 +214,7 @@ class Form extends ComponentBase {
 				if(!filter_var($invoice_email, FILTER_VALIDATE_EMAIL)) {
 					$err = "Invalid invoice email format";
 					throw new ValidationException(['invoice_email' => $err]);
+					return ['scroll_to_field' => $validator->messages()->toArray()];
 				}
 			}
 
@@ -205,6 +223,7 @@ class Form extends ComponentBase {
 				if($lData) {
 					$err = "The email is already taken";
 					throw new ValidationException(['email' => $err]);
+					return ['scroll_to_field' => $validator->messages()->toArray()];
 				}
 			}
 

@@ -1,5 +1,17 @@
-
-<form method="post" data-request="{{__SELF__}}::onSubmit" data-request-files data-request-flash  enctype="multipart/form-data">
+<div class="spinner" id="loading_gif">
+	<div class="bounce1"></div>
+	<div class="bounce2"></div>
+	<div class="bounce3"></div>
+</div>
+<form method="post"
+	  data-request="{{__SELF__}}::onSubmit"
+	  enctype="multipart/form-data"
+	  id="tdwg_registration_form"
+	  data-request-files
+	  data-request-validate
+	  data-request-flash
+	  data-request-success="scrollToField(data)"
+>
 	<input type="hidden" name="_handler" value="onSubmit">
 	{{ form_token() }}
 	{{ form_sessionKey() }}
@@ -23,6 +35,7 @@
 			</div>
 			<div class="row box">
 				<div class="col-md-4 col-xs-12 field" id="registration_request_field">
+					<span data-validate-for="type" class="flash-message static error"></span>
 					<label for="type"><p>I will attend<span class="required">*</span></p></label>
 					<select id="type" name="type" required>
 						<option value="">-- Choose --</option>
@@ -286,7 +299,7 @@
 				</div>
 			</div>
 
-			<div class="row box">
+			<div class="row box" id="payment_options">
 				<div class="col-md-12 col-xs-12 field" id="payment_options_field">
 					<label for="payment_options"><p>Payment options<span class="required">*</span></p></label>
 						<label><input name="payment_options[]" type="radio" value="pay_now" {% if (data.payment_options == "pay_now") %} checked {% endif %} required>Pay now (Bank card, PayPal)</label>
@@ -409,7 +422,8 @@
 
 					<div class="row center-xs">
 						<div class="col-xs-12 col-md-3">
-							<input type="submit" name="tAction" value="Preview" class="btn btn-primary">
+							<!--<input type="submit" name="tAction" value="Preview" class="btn btn-primary">-->
+							<input type="button" name="tAction" value="Preview" class="btn btn-primary" onclick="submitTDWGForm(event);">
 						</div>
 					</div>
 				</div>
