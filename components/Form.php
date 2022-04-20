@@ -21,6 +21,8 @@ use Redirect;
  * Form Component
  */
 class Form extends ComponentBase {
+	public $thankYouMessage;
+
     public function componentDetails() {
         return [
             'name' => 'TDWG Form Component',
@@ -29,13 +31,12 @@ class Form extends ComponentBase {
     }
 
     public function defineProperties() {
-        return [
-            'recaptcha_key' => [
-                'title' => 'Recaptcha site key',
-                'type' => 'string',
-                'default' => ''
-            ],
-        ];
+
+		$this->page['event'] = (new Entry())::where('id', env('TDWG_ID'))->first();
+		$this->page['message'] = \Session::get('message');
+		$this->page['payment_message'] = \Session::get('payment_message');
+		$this->page['link'] = \Session::get('link');
+		$this->thankYouMessage = $this->page['event']['thank_you_message'];
     }
 
     public function onRun() {
@@ -288,12 +289,13 @@ class Form extends ComponentBase {
 				Flash::error('Mail not sent');
 				return;
 			}
-
-            return \Redirect::to('/');
+			return \Redirect::to('/registration-success')->with(['message' => $this->thankYouMessage]);
         }
+		return \Redirect::to('/');
     }
 
     public function onPaymentProceed() {
+
         $ID = (int)post('ID');
 
         if($ID) {
@@ -412,7 +414,8 @@ class Form extends ComponentBase {
 						Flash::error('Mail not sent');
 						return;
 					}
-					return \Redirect::to('/');
+//					return \Redirect::to('/registration-success')->with(['message' => $this->thankYouMessage, 'payment_message' => 'You will be redirected to proceed with your payment ...']);
+					return \Redirect::to('/registration-success')->with(['message' => $this->thankYouMessage]);
 				}else{
 					Mail::send('pensoft.tdgw::mail.finish_tdwg_registration_with_payment', $vars, function($message) use ($item, $settings) {
 						$message->to($item->email, $item->full_name);
@@ -424,10 +427,12 @@ class Form extends ComponentBase {
 						Flash::error('Mail not sent');
 						return;
 					}
-					return \Redirect::to($link);
+					return \Redirect::to('/registration-success')->with(['message' => $this->thankYouMessage, 'payment_message' => 'You will be redirected to proceed with your payment ...', 'link' => $link]);
 				}
             }
         }
+
+		return \Redirect::to('/');
     }
 
 

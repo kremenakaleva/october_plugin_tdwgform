@@ -69,3 +69,5 @@
     - 'Fix'
 1.0.67:
     - 'Redirect mail after finish'
+1.0.68:
+    - 'Form labels fix; Redirect after finish registration.;'

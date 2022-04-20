@@ -8,9 +8,8 @@
 			<div class="row middle-xs">
 				<div class="col-xs-12 col-sm-8">
 					<h1>
-						Here will be the form title
+						TDWG 2022 registration form
 					</h1>
-					<h3>Here will be the form intro text</h3>
 				</div>
 
 			</div>
@@ -24,11 +23,11 @@
 			</div>
 			<div class="row box">
 				<div class="col-md-4 col-xs-12 field" id="registration_request_field">
-					<label for="type"><p>Registration request<span class="required">*</span></p></label>
+					<label for="type"><p>I will attend<span class="required">*</span></p></label>
 					<select id="type" name="type" required>
 						<option value="">-- Choose --</option>
-						<option value="physical" id="physical" {% if (data.type == "physical") %} selected {% endif %}>Physical attendance</option>
-						<option value="virtual" id="virtual"{% if (data.type == "virtual") %} selected {% endif %}>Online attendance</option>
+						<option value="physical" id="physical" {% if (data.type == "physical") %} selected {% endif %}>in-person</option>
+						<option value="virtual" id="virtual"{% if (data.type == "virtual") %} selected {% endif %}>online</option>
 					</select>
 				</div>
 
@@ -173,7 +172,7 @@
 				<div class="col-md-6 col-xs-12 field">
 
 					<div class="field">
-						<label for="phone"><p>Phone</p></label>
+						<label for="phone"><p>Phone (include also the counry code)</p></label>
 						<input type="text" id="phone" name="phone" value="{{data.phone}}">
 					</div>
 				</div>
@@ -190,7 +189,7 @@
 				<div class="col-md-6 col-xs-12 field">
 
 					<div class="field">
-						<label for="emergency_contact_phone"><p>Emergency contact phone<span class="required">*</span></p></label>
+						<label for="emergency_contact_phone"><p>Emergency contact phone (include also the counry code)<span class="required">*</span></p></label>
 						<input type="text" id="emergency_contact_phone" name="emergency_contact_phone" value="{{data.emergency_contact_phone}}" required>
 					</div>
 				</div>
@@ -218,7 +217,7 @@
 							<option value="{{ option.id }}" id="ticket_{{ option.id }}" {% if (data.discount_option_id == option.id) %} selected {% endif %}>{{ option.name }} - {{ option.amount }} {{ option.currency }}</option>
 						{% endfor %}
 					</select>
-					<div id="ticket_type_message" class="ticket_type_message"><em>Early Registration Discount -50 &euro; will be applied</em></div>
+					<div id="ticket_type_message" class="ticket_type_message">Early Registration Discount <b>-50 &euro;</b> will be applied</div>
 				</div>
 				<div class="col-md-6 col-xs-12 field" id="members_code_field">
 					<label for="discount_code"><p>Members code (case-sensitive)</p></label>
@@ -283,7 +282,7 @@
 					<div class="col-md-12 col-xs-12 field">
 
 						<div class="field">
-							<label for="group_members_list"><p>List of people who will register and should be added to the same invoice<span class="required">*</span></p></label>
+							<label for="group_members_list"><p>For group invoice: List of people who will register and should be added to the same invoice; For extra invoice: provide more details<span class="required">*</span></p></label>
 							<textarea name="group_members_list" id="group_members_list" cols="" rows="12">{{data.invoice_group_members}}</textarea>
 							<script>
 								// instance, using default configuration.
@@ -297,7 +296,7 @@
 					<div class="col-md-12 col-xs-12 field">
 
 						<div class="field">
-							<label for="billing_details"><p>Billing details (company name, VAT number, address, country)<span class="required">*</span></p></label>
+							<label for="billing_details"><p>Billing details for the group or extra invoice [company name, address, country, VAT number (if applicable)]<span class="required">*</span></p></label>
 							<textarea name="billing_details" id="billing_details" cols="" rows="12">{{data.billing_details}}</textarea>
 							<script>
 								// instance, using default configuration.
@@ -311,7 +310,7 @@
 					<div class="col-md-12 col-xs-12 field">
 
 						<div class="field">
-							<label for="invoice_email"><p>Send invoice to the following email<span class="required">*</span></p></label>
+							<label for="invoice_email"><p>E-mail address where the group or extra invoice will be sent<span class="required">*</span></p></label>
 							<input type="text" id="invoice_email" name="invoice_email" value="{{data.invoice_email}}">
 						</div>
 					</div>
