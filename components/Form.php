@@ -420,7 +420,9 @@ class Form extends ComponentBase {
                     'invoice_email' => $data->invoice_email,
                     'group_members_list' => $data->group_members_list,
                     'comments' => $data->comments,
+					'payment_options' => $data->payment_options,
                 ];
+
                 $json = json_encode($data, true);
 
                 $httpResponse = \Http::post(env('TDWG_REQUEST_URL'), function($http) use ($json) {

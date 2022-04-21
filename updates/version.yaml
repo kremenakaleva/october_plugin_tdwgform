@@ -78,3 +78,5 @@
     - 'Recaptcha fix'
 1.0.71:
     - 'Validation fixes'
+1.0.72:
+    - 'Add payment option value to invoices request data'
