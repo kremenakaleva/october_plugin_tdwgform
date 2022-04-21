@@ -76,3 +76,5 @@
     - builder_table_update_pensoft_tdwgform_data_12.php
 1.0.70:
     - 'Recaptcha fix'
+1.0.71:
+    - 'Validation fixes'

@@ -173,8 +173,8 @@ class Form extends ComponentBase {
                 'payment_options' => 'required',
                 'discount_code' => 'string|min:4',
                 'discount_options' => 'required|integer',
-//                'group_members_list' => 'required_if:payment_options,group_invoice,string',
-//                'billing_details' => 'required_if:payment_options,group_invoice,string',
+                'group_members_list' => 'required_if:payment_options,group_invoice,string',
+                'billing_details' => 'required_if:payment_options,group_invoice,string',
                 'invoice_email' => 'required_if:payment_options,group_invoice,email',
 				'checkbox_code_of_conduct' => 'required',
 				'checkbox_presenting' => 'required',
@@ -213,8 +213,8 @@ class Form extends ComponentBase {
 			if($payment_options[0] == 'group_invoice') {
 				if(!filter_var($invoice_email, FILTER_VALIDATE_EMAIL)) {
 					$err = "Invalid invoice email format";
-					throw new ValidationException(['invoice_email' => $err]);
-					return ['scroll_to_field' => $validator->messages()->toArray()];
+					Flash::error($err);
+					return ['scroll_to_field' => (object)array("invoice_email" => array($err))];
 				}
 			}
 
@@ -222,8 +222,8 @@ class Form extends ComponentBase {
 				$lData = Data::where('email', $email)->where('id', '!=', $registration_id)->first();
 				if($lData) {
 					$err = "The email is already taken";
-					throw new ValidationException(['email' => $err]);
-					return ['scroll_to_field' => $validator->messages()->toArray()];
+					Flash::error($err);
+					return ['scroll_to_field' => (object)array("email" => array($err))];
 				}
 			}
 
@@ -232,7 +232,8 @@ class Form extends ComponentBase {
 					$this->normalizeTelephoneNumber($phone);
 				}else{
 					$err = "The provided phone number is not valid";
-					throw new ValidationException(['phone' => $err]);
+					Flash::error($err);
+					return ['scroll_to_field' => (object)array("phone" => array($err))];
 				}
 			}
 
@@ -241,7 +242,8 @@ class Form extends ComponentBase {
 					$this->normalizeTelephoneNumber($emergency_contact_phone);
 				}else{
 					$err = "The provided emergency contact phone number is not valid";
-					throw new ValidationException(['emergency_contact_phone' => $err]);
+					Flash::error($err);
+					return ['scroll_to_field' => (object)array("emergency_contact_phone" => array($err))];
 				}
 			}
 
@@ -250,14 +252,16 @@ class Form extends ComponentBase {
 				$discountCodeData = $this->checkDiscountCode($discount_code);
 				if (!$discountCodeData){
 					$err = "The provided discount code is not valid or is already used";
-					throw new ValidationException(['discount_code' => $err]);
+					Flash::error($err);
+					return ['scroll_to_field' => (object)array("discount_code" => array($err))];
 				}
 			}
 
 			if($slack_email) {
 				if(!filter_var($slack_email, FILTER_VALIDATE_EMAIL)) {
 					$err = "Invalid email format when using Slack or Discord";
-					throw new ValidationException(['slack_email' => $err]);
+					Flash::error($err);
+					return ['scroll_to_field' => (object)array("slack_email" => array($err))];
 				}
 			}
 
