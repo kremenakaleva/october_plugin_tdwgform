@@ -330,7 +330,7 @@ class Form extends ComponentBase {
     public function onFinishRegistration() {
         $ID = (int)post('ID');
         if((int)$ID) {
-            $data = Data::where('id', (int)$ID)->where('submission_completed', false)->first();
+            $data = Data::where('id', (int)$ID)->whereRaw('submission_completed IS NOT TRUE')->first();
             $data->submission_completed = 'true';
             $data->save();
 
@@ -455,7 +455,7 @@ class Form extends ComponentBase {
                     throw new \ApplicationException('Pensoft API did not respond with a proper URI.');
                 }
 
-				$saveData = Data::where('id', (int)$ID)->where('submission_completed', false)->first();
+				$saveData = Data::where('id', (int)$ID)->whereRaw('submission_completed IS NOT TRUE')->first();
 				$saveData->submission_completed = 'true';
 				$saveData->save();
 
