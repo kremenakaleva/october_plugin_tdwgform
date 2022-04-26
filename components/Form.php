@@ -10,6 +10,7 @@ use Pensoft\Tdwgform\Models\DiscountOptions;
 use October\Rain\Support\Facades\Flash;
 use Pensoft\Tdwgform\Models\Products;
 use RainLab\Location\Models\Country;
+use Ramsey\Uuid\Uuid;
 use System\Models\MailSetting;
 use ValidationException;
 use Illuminate\Support\Facades\Input;
@@ -44,7 +45,7 @@ class Form extends ComponentBase {
         $this->page['discount_options'] = $this->discount_options();
         $this->page['data'] = null;
         if($this->param('registration_id')) {
-            $this->page['data'] = Data::where('id', (int)$this->param('registration_id'))->first();
+            $this->page['data'] = Data::where('data_id', $this->param('registration_id'))->first();
         }
     }
 
@@ -219,7 +220,7 @@ class Form extends ComponentBase {
 			}
 
 			if($registration_id) {
-				$lData = Data::where('email', $email)->where('id', '!=', $registration_id)->first();
+				$lData = Data::where('email', $email)->where('data_id', '!=', $registration_id)->first();
 				if($lData) {
 					$err = "The email is already taken";
 					Flash::error($err);
@@ -265,9 +266,8 @@ class Form extends ComponentBase {
 				}
 			}
 
-
             if($registration_id) {
-                $data = Data::find($registration_id);
+                $data = Data::where('data_id', $registration_id)->first();
             } else {
                 $data = new Data();
             }
@@ -320,9 +320,9 @@ class Form extends ComponentBase {
 			$data->checkbox_optional_open_session = $checkbox_optional_open_session;
 			$data->checkbox_optional_agree_shared = $checkbox_optional_agree_shared;
 
-            $data->save();
+			$data->save();
 
-            $recordID = $data->id;
+            $recordID = $data->data_id;
             return Redirect::to('/registration-preview/' . $recordID);
         }
     }

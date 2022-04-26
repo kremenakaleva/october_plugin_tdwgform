@@ -94,6 +94,11 @@ fields:
         size: large
         span: auto
         type: richeditor
+    data_id:
+        label: 'Data ID'
+        span: auto
+        type: text
+        comment: (UUID)
 tabs:
     fields:
         payment_options:

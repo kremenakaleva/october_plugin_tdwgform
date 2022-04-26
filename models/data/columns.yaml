@@ -76,3 +76,7 @@ columns:
         type: switch
         searchable: true
         sortable: true
+    data_id:
+        label: UUID
+        type: text
+        searchable: false

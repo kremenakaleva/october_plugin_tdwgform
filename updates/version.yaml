@@ -80,3 +80,27 @@
     - 'Validation fixes'
 1.0.72:
     - 'Add payment option value to invoices request data'
+1.0.73:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_13.php
+1.0.74:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_14.php
+1.0.75:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_15.php
+1.0.76:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_16.php
+1.0.77:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_17.php
+1.0.78:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_18.php
+1.0.79:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_19.php
+1.0.80:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_21.php

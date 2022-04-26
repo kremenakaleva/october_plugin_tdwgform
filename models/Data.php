@@ -1,6 +1,7 @@
 <?php namespace Pensoft\Tdwgform\Models;
 
 use Model;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Model
@@ -29,4 +30,13 @@ class Data extends Model
 		'country' => ['RainLab\Location\Models\Country'],
 		'discount_option' => ['Pensoft\Tdwgform\Models\DiscountOptions', 'key' => 'discount_option_id'],
 	];
+
+	protected $fillable = [
+        'data_id'
+    ];
+
+	public function beforeCreate()
+	{
+		$this->data_id = Uuid::uuid4()->toString();
+	}
 }
