@@ -113,7 +113,8 @@
     - Fix
 1.0.85:
     - 'Updated table pensoft_tdwgform_data'
-    - builder_table_update_pensoft_tdwgform_data_23.php
 1.0.86:
     - 'Updated table pensoft_tdwgform_data'
     - builder_table_update_pensoft_tdwgform_data_24.php
+1.0.87:
+    - 'Fix'
