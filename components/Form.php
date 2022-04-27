@@ -125,6 +125,8 @@ class Form extends ComponentBase {
         $checkbox_presenting = \Input::get('checkbox_presenting');
         $checkbox_agree = \Input::get('checkbox_agree');
         $checkbox_media = \Input::get('checkbox_media');
+        $checkbox_received = \Input::get('checkbox_received');
+        $checkbox_declare = \Input::get('checkbox_declare');
         $checkbox_optional_abstract = \Input::get('checkbox_optional_abstract');
         $checkbox_optional_attend_welcome = \Input::get('checkbox_optional_attend_welcome');
         $checkbox_optional_attend_excursion = \Input::get('checkbox_optional_attend_excursion');
@@ -157,6 +159,8 @@ class Form extends ComponentBase {
                 'checkbox_presenting' => $checkbox_presenting,
                 'checkbox_agree' => $checkbox_agree,
                 'checkbox_media' => $checkbox_media,
+                'checkbox_received' => $checkbox_received,
+                'checkbox_declare' => $checkbox_declare,
 				'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
             ],
             [
@@ -181,6 +185,8 @@ class Form extends ComponentBase {
 				'checkbox_presenting' => 'required',
 				'checkbox_agree' => 'required',
 				'checkbox_media' => 'required',
+				'checkbox_received' => 'required',
+				'checkbox_declare' => 'required',
 				'g-recaptcha-response' => [
 					'required',
 					new RecaptchaValidator(),
@@ -192,10 +198,15 @@ class Form extends ComponentBase {
 			"type" => "The I will attend field is required.",
 			"payment_options" => "Please choose a payment option.",
 			"discount_options" => "Please choose a ticket type.",
+			"group_members_list" => "For group invoice: List of people who will register and should be added to the same invoice; For extra invoice: provide more details is required",
+			"billing_details" => "Billing details for the group or extra invoice is required",
+			"invoice_email" => "E-mail address where the group or extra invoice will be sent is required",
 			"checkbox_code_of_conduct" => "Please check the \"I have read the Code of Conduct and Terms of Use and agree to abide by them\" field.",
 			"checkbox_presenting" => "Please check the \"If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube channel\" field.",
 			"checkbox_agree" => "Please check the \"I agree to be contacted by event organizers\" field.",
 			"checkbox_media" => "Please check the \"For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or CC0\" field.",
+			"checkbox_received" => "Please check the \"I have received and understood the privacy information and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time\" field.",
+			"checkbox_declare" => "Please check the \"I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference\" field.",
 		];
 
 
@@ -311,6 +322,8 @@ class Form extends ComponentBase {
 			$data->checkbox_presenting = $checkbox_presenting;
 			$data->checkbox_agree = $checkbox_agree;
 			$data->checkbox_media = $checkbox_media;
+			$data->checkbox_received = $checkbox_received;
+			$data->checkbox_declare = $checkbox_declare;
 			$data->checkbox_optional_abstract = $checkbox_optional_abstract;
 			$data->checkbox_optional_attend_welcome = ($type == 'virtual') ? null : $checkbox_optional_attend_welcome;
 			$data->checkbox_optional_attend_conference = ($type == 'virtual') ? null : $checkbox_optional_attend_conference;
