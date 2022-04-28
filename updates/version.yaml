@@ -118,3 +118,5 @@
     - builder_table_update_pensoft_tdwgform_data_24.php
 1.0.87:
     - 'Fix'
+1.0.88:
+    - 'Form labels fix'

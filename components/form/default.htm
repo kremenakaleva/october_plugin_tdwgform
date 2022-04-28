@@ -258,7 +258,7 @@
 
 			<div class="row box">
 				<div class="col-md-6 col-xs-12 field" id="accompanying_person_field_container">
-					<label for="accompanying_person"><p>Accompanying person's name - 135 &euro;</p></label>
+					<label for="accompanying_person"><p>Accompanying person - 135 &euro;</p></label>
 					<!-- Rounded switch -->
 					<label class="switch">
 						<input type="checkbox" name="accompanying_person" id="accompanying_person_field" value="1" {% if (data.accompanying_person == 1) %} checked {% endif %}>
@@ -266,7 +266,7 @@
 					</label>
 				</div>
 				<div class="col-md-6 col-xs-12 field" id="accompanying_person_name_field">
-					<label for="accompanying_person_name"><p>Accompanying person name</p></label>
+					<label for="accompanying_person_name"><p>Accompanying person's name</p></label>
 					<input type="text" id="accompanying_person_name" name="accompanying_person_name" value="{{data.accompanying_person_name}}">
 					<br>
 					<label for="accompanying_person_has_invoice"><p>I want an extra invoice for the accompanying person</p></label>
@@ -376,12 +376,12 @@
 
 					<div class="row box">
 						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_received"><p><input type="checkbox" name="checkbox_received" value="1" id="checkbox_received" {% if (data.checkbox_received == 1) %} checked {% endif %}> I have received and understood the privacy information and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.</p></label>
+							<label for="checkbox_received"><p><input type="checkbox" name="checkbox_received" value="1" id="checkbox_received" {% if (data.checkbox_received == 1) %} checked {% endif %}> I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.<span class="required">*</span></p></label>
 						</div>
 					</div>
 					<div class="row box">
 						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_declare"><p><input type="checkbox" name="checkbox_declare" value="1" id="checkbox_declare" {% if (data.checkbox_declare == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.</p></label>
+							<label for="checkbox_declare"><p><input type="checkbox" name="checkbox_declare" value="1" id="checkbox_declare" {% if (data.checkbox_declare == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.<span class="required">*</span></p></label>
 						</div>
 					</div>
 
