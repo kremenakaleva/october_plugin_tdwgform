@@ -122,3 +122,5 @@
     - 'Form labels fix'
 1.0.89:
     - 'Mail template variables'
+1.0.90:
+    - 'Mail templates and form preview changes'

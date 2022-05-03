@@ -354,10 +354,13 @@ class Form extends ComponentBase {
 				$code->save();
 			}
 
+			$formData = $this->formDataMailPreview($data->toArray());
+
 			//SEND MAIL
 			$settings = MailSetting::instance();
 			$vars = [
 				'full_name' => $data->first_name . ' ' . $data->last_name,
+				'formData' => $formData,
 			];
 			Mail::send('pensoft.tdgw::mail.finish_tdwg_registration', $vars, function($message) use ($data, $settings) {
 				$message->to($data->email, $data->full_name);
@@ -479,11 +482,14 @@ class Form extends ComponentBase {
 					$code->save();
 				}
 
+				$formData = $this->formDataMailPreview($saveData->toArray());
+
 				//SEND MAIL
 				$settings = MailSetting::instance();
 				$vars = [
-					'full_name' => $data->first_name . ' ' . $data->last_name,
+					'full_name' => $saveData->first_name . ' ' . $saveData->last_name,
 					'link' => $link,
+					'formData' => $formData,
 				];
 				if($item->payment_options == 'group_invoice' && $item->invoice_email){
 					Mail::send('pensoft.tdgw::mail.finish_tdwg_registration_with_group_invoice', $vars, function($message) use ($item, $settings) {
@@ -551,6 +557,54 @@ class Form extends ComponentBase {
 
 	}
 
+	private function getCountryName($id) {
+		$country = Country::where('id', $id)->first()->toARray();
+		if(count($country)){
+			return $country['name'];
+		}
+		return '';
+	}
+
+	private function getTicketNameAndAmount($id, $type) {
+		$ticket = DiscountOptions::where('id', (int)$id)->first()->toArray();
+		$ticket_amaount = $amount = ($type == 'virtual') ? $ticket['amount_virtual'] :  $ticket['amount'];
+		$ticket_type = $ticket['name'];
+		return $ticket_type . ', ' .$ticket_amaount.' &euro;';
+	}
+
+	private function getTotal($data) {
+		$ticket = DiscountOptions::where('id', (int)$data['discount_option_id'])->first()->toArray();
+		$amount = ($data['type'] == 'virtual') ? $ticket['amount_virtual'] :  $ticket['amount'];
+		$ap = (int)$data['accompanying_person'] ? 135 : 0;
+		$help = (int)$data['help_others'] ? 25 : 0;
+
+		$earlyDiscount = 0;
+		if( $data['type'] == 'physical' && (int)$data['discount_option_id'] == 1 && Carbon::now() <=  env('EARLY_BOOKING_DATE')){
+			$earlyDiscount += 50;
+		}
+
+		$amount = $amount - $earlyDiscount;
+
+		$codeDiscount = 0;
+		if($data['discount_code']){
+			$codeData = Codes::where('code', $data['discount_code'])->where('is_used', false)->first();
+			if($codeData){
+				if($codeData['type'] == '%'){
+					$codeDiscount += ((int)$codeData->value / 100) * $amount;
+				}else{
+					$codeDiscount += (int)$codeData->value;
+				}
+				$amount = $amount - $codeDiscount;
+			}else{
+				$codeDiscount = 0;
+			}
+		}
+
+		return $amount + $ap + $help;
+//		$this['code_discount'] = $codeDiscount;
+//		$this['early_discount'] = $earlyDiscount;
+	}
+
 	function onDiscountCodeValidate() {
 		$code = post('code');
 		if($code){
@@ -561,6 +615,81 @@ class Form extends ComponentBase {
 			}
 			return ['result' => $codeData->toArray()];
 		}
+	}
+
+	private function formDataMailPreview($data){
+    	$total = $this->getTotal($data);
+		$html = '';
+
+    		$html .= '<b>Registration request:</b> ' . $data['type'];
+			$html .= '<br><b>Name:</b> ' . $data['prefix'] . ' ' . $data['first_name'] . ' ' . $data['middle_name'] . ' ' . $data['last_name'] . ' ' . $data['suffix'].' ';
+			$html .= ($data['first_name_tag']) ? '<br><b>Name tag (first and last names):</b> '.$data['first_name_tag'] : '';
+			$html .= ($data['last_name_tag']) ? '<br><b>Affiliation:</b> '.$data['last_name_tag'] : '';	
+			$html .= ($data['title']) ? '<br><b>Position:</b> '.$data['title'] : '';	
+			$html .= ('<br><b>Email:</b> '.$data['email']);
+			$html .= ($data['phone']) ? '<br><b>Phone:</b> '.$data['phone'] : '';	
+			$html .= ($data['address']) ? '<br><b>Address line 1:</b> '.$data['address'] : '';	
+			$html .= ($data['address2']) ? '<br><b>Address line 2:</b> '.$data['address2'] : '';	
+			$html .= ($data['country_id']) ? '<br><b>Country:</b> '.($this->getCountryName($data['country_id'])) : '';	
+			$html .= ($data['city']) ? '<br><b>City:</b> '.$data['city'] : '';	
+			$html .= ($data['region']) ? '<br><b>State / Province / Region:</b> '.$data['region'] : '';	
+			$html .= ($data['postal_code']) ? '<br><b>Zip / Postal Code:</b> '.$data['postal_code'] : '';
+
+			$html .= '<br><b>Emergency contact name:</b> ' . $data['emergency_contact_name'] . '<br><b>Emergency contact phone:</b> ' . $data['emergency_contact_phone'];
+				
+			$html .= ($data['slack_email']) ? ('<br><b>Preferred email when using Slack or Discord:</b> '.$data['slack_email']) : '';
+			$html .= ($data['twitter']) ? ('<br><b>My Twitter handle:</b> '.$data['twitter']) : '';
+			$html .= ($data['comments']) ? '<br><br><b>Comments:</b> '.$data['comments'] : '';
+
+
+			$html .= '<br><b>Ticket type:</b> ' . ($this->getTicketNameAndAmount($data['discount_option_id'], $data['type']));
+					
+			$html .= ($data['discount_code']) ? '<br><b>Member discount code:</b> '.$data['discount_code'] : '';	
+			$html .= ($data['accompanying_person']) ? '<br><b>Accompanying person:</b> '. ($data['accompanying_person_name'].',' ?: 'Yes,').' 135 &euro;' : '';
+			$html .= ($data['accompanying_person_has_invoice']) ? '<br><b>I want an extra invoice for the accompanying person:</b> Yes' : '';	
+
+			$html .= ($data['help_others']) ? '<br><b>I want to donate funds for those who need support for registration:</b> Yes,  25 &euro;' : '';	
+			$html .= ($data['help_others_has_invoice']) ? '<br><b>I want an extra invoice for the donation funds:</b> Yes' : '';	
+		
+			$html .= ($total) ? '<br><b>Total amount:</b> '.$total.' &euro;' : '';
+
+			$html .= ($data['invoice_email'] && $total > 0) ? ('
+			
+			<b>Payment:</b>
+					I need a group invoice or extra invoice, payment due on receipt by Bank card, PayPal
+				
+		
+					<br><b>List of people who will register and should be added to the same invoice:</b>
+					' . $data['invoice_group_members'] . '
+				
+					<br><b>Billing details (company name, VAT number, address, country):</b>
+					' . $data['billing_details'] . '
+				
+					<br><b>Send invoice to the following email:</b>
+					' . $data['invoice_email'])
+
+				: '';
+
+			$html .= '<ul>';
+				$html .= ($data['checkbox_code_of_conduct']) ? '<li>I have read the <a href="https://www.tdwg.org/about/code-of-conduct/" target="_blank">Code of Conduct</a> and <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a> and agree to abide by them.</li>' : '';
+				$html .= ($data['checkbox_presenting']) ? '<li>If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube channel.</li>' : '';
+				$html .= ($data['checkbox_agree']) ? '<li>I agree to be contacted by event organizers.</li>' : '';
+				$html .= ($data['checkbox_media']) ? '<li>For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>. (see <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a>)</li>' : '';
+				$html .= ($data['checkbox_received']) ? '<li>I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.</li>' : '';
+				$html .= ($data['checkbox_declare']) ? '<li>I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.</li>' : '';
+				$html .= ($data['checkbox_optional_abstract']) ? '<li>I plan to submit an abstract.</li>' : '';
+				$html .= ($data['checkbox_optional_attend_welcome']) ? '<li>I plan to attend the Welcome reception on 16 October 2022 (included in the in-person registration fee).</li>' : '';
+				$html .= ($data['checkbox_optional_attend_excursion']) ? '<li>I plan to attend the excursion to Rila Monastery on Wednesday 19 October 2022 (included in the in-person registration fee).</li>' : '';
+				$html .= ($data['checkbox_optional_attend_conference']) ? '<li>I plan to attend the conference banquet on Thursday  20 October 2022 (included in the in-person registration fee).</li>' : '';
+				$html .= ($data['checkbox_optional_contacted']) ? '<li>I agree to be contacted by event Supporters post-conference.</li>' : '';
+				$html .= ($data['checkbox_optional_understand']) ? '<li>I understand the fee for anyone I add to accompany me covers the welcome reception, excursion to Rila monastery and banquet.</li>' : '';
+				$html .= ($data['checkbox_optional_open_session']) ? '<li>I\'m willing to chair /  moderate a general open session at TDWG2022</li>' : '';
+				$html .= ($data['checkbox_optional_agree_shared']) ? '<li>I agree for my name, affiliation, and email to be shared after the conference with other attendees</li>' : '';
+			$html .= '</ul>';
+
+			$html .= '<p>&nbsp;</p>';
+
+    	return $html;
 	}
 
 }

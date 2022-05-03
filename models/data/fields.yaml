@@ -47,10 +47,6 @@ fields:
         label: Phone
         span: auto
         type: text
-    fax:
-        label: Fax
-        span: auto
-        type: text
     address:
         label: Address
         span: auto
@@ -99,6 +95,10 @@ fields:
         span: auto
         type: text
         comment: (UUID)
+    submission_completed:
+        label: 'Completed submission'
+        span: auto
+        type: switch
 tabs:
     fields:
         payment_options:
