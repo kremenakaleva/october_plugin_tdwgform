@@ -357,7 +357,7 @@ class Form extends ComponentBase {
 			//SEND MAIL
 			$settings = MailSetting::instance();
 			$vars = [
-				'full_name' => $data->prefix . ' ' . $data->first_name . ' ' . $data->middle_name . ' ' . $data->last_name . ' ' . $data->suffix,
+				'full_name' => $data->first_name . ' ' . $data->last_name,
 			];
 			Mail::send('pensoft.tdgw::mail.finish_tdwg_registration', $vars, function($message) use ($data, $settings) {
 				$message->to($data->email, $data->full_name);
@@ -482,7 +482,7 @@ class Form extends ComponentBase {
 				//SEND MAIL
 				$settings = MailSetting::instance();
 				$vars = [
-					'full_name' => $item->prefix . ' ' . $item->first_name . ' ' . $item->middle_name . ' ' . $item->last_name . ' ' . $item->suffix,
+					'full_name' => $data->first_name . ' ' . $data->last_name,
 					'link' => $link,
 				];
 				if($item->payment_options == 'group_invoice' && $item->invoice_email){
