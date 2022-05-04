@@ -202,7 +202,7 @@ class Form extends ComponentBase {
 			"billing_details" => "Billing details for the group or extra invoice is required",
 			"invoice_email" => "E-mail address where the group or extra invoice will be sent is required",
 			"checkbox_code_of_conduct" => "Please check the \"I have read the Code of Conduct and Terms of Use and agree to abide by them\" field.",
-			"checkbox_presenting" => "Please check the \"If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube channel\" field.",
+			"checkbox_presenting" => "Please check the \"If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube, Twitter and other social media channels\" field.",
 			"checkbox_agree" => "Please check the \"I agree to be contacted by event organizers\" field.",
 			"checkbox_media" => "Please check the \"For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or CC0\" field.",
 			"checkbox_received" => "Please check the \"I have received and understood the privacy information and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time\" field.",
@@ -672,7 +672,7 @@ class Form extends ComponentBase {
 
 			$html .= '<ul>';
 				$html .= ($data['checkbox_code_of_conduct']) ? '<li>I have read the <a href="https://www.tdwg.org/about/code-of-conduct/" target="_blank">Code of Conduct</a> and <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a> and agree to abide by them.</li>' : '';
-				$html .= ($data['checkbox_presenting']) ? '<li>If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube channel.</li>' : '';
+				$html .= ($data['checkbox_presenting']) ? '<li>If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube, Twitter and other social media channels.</li>' : '';
 				$html .= ($data['checkbox_agree']) ? '<li>I agree to be contacted by event organizers.</li>' : '';
 				$html .= ($data['checkbox_media']) ? '<li>For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>. (see <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a>)</li>' : '';
 				$html .= ($data['checkbox_received']) ? '<li>I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.</li>' : '';

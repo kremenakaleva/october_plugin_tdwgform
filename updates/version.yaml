@@ -124,3 +124,5 @@
     - 'Mail template variables'
 1.0.90:
     - 'Mail templates and form preview changes'
+1.0.91:
+    - 'Checkbox label change'
