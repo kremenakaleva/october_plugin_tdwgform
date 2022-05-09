@@ -126,3 +126,5 @@
     - 'Mail templates and form preview changes'
 1.0.91:
     - 'Checkbox label change'
+1.0.92:
+    - 'emergency contact required only for in-person'
