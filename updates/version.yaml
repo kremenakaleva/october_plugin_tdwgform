@@ -128,3 +128,5 @@
     - 'Checkbox label change'
 1.0.92:
     - 'emergency contact required only for in-person'
+1.0.93:
+    - 'export to excel'
