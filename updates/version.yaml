@@ -130,3 +130,5 @@
     - 'emergency contact required only for in-person'
 1.0.93:
     - 'export to excel'
+1.0.94:
+    - 'mail discount code total amount fix'

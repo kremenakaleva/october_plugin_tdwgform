@@ -589,7 +589,7 @@ class Form extends ComponentBase {
 
 		$codeDiscount = 0;
 		if($data['discount_code']){
-			$codeData = Codes::where('code', $data['discount_code'])->where('is_used', false)->first();
+			$codeData = Codes::where('code', $data['discount_code'])->first();
 			if($codeData){
 				if($codeData['type'] == '%'){
 					$codeDiscount += ((int)$codeData->value / 100) * $amount;
