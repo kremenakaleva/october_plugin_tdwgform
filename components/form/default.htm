@@ -243,7 +243,7 @@
 					<select id="discount_options" name="discount_options" required>
 						<option value="">-- Choose --</option>
 						{% for option in discount_options %}
-							<option value="{{ option.id }}" id="ticket_{{ option.id }}" {% if (data.discount_option_id == option.id) %} selected {% endif %}>{{ option.name }} - {{ option.amount }} {{ option.currency }}</option>
+						<option value="{{ option.id }}" id="ticket_{{ option.id }}" {% if (data.discount_option_id == option.id) %} selected {% endif %}>{{ option.name }} - {{ option.amount }} {{ option.currency }}</option>
 						{% endfor %}
 					</select>
 					<div id="ticket_type_message" class="ticket_type_message">Early Registration Discount <b>-50 &euro;</b> will be applied</div>
@@ -299,11 +299,42 @@
 				</div>
 			</div>
 
+			<!--t-shirt-->
+			<div class="row box">
+				<div class="col-md-8 col-xs-12 field" id="add_tshirt_field_container">
+					<label for="add_tshirt"><p>I want to order a branded TDWG 2022 T-shirt and pay during the conference - 15 &euro;</p></label>
+					<!-- Rounded switch -->
+					<label class="switch">
+						<input type="checkbox" name="add_tshirt" value="1" id="add_tshirt_field" {% if (data.add_tshirt == 1) %} checked {% endif %}>
+						<span class="slider round"></span>
+					</label>
+				</div>
+				<div class="col-md-4 col-xs-12 field" id="tshirt_type_size_field">
+					<label for="tshirt_type"><p>T-Shirt type</p></label>
+					<select id="tshirt_type" name="tshirt_type">
+						<!--<option value="">&#45;&#45; Choose &#45;&#45;</option>-->
+						<option value="women" id="tshirt_type_women" {% if (data.tshirt_type == 'women') %} selected {% endif %}>Women's T-shirt</option>
+						<option value="men" id="tshirt_type_men" {% if (data.tshirt_type == 'men') %} selected {% endif %}>Men's T-shirt</option>
+					</select>
+					<br>
+					<label for="tshirt_size"><p>T-Shirt size</p></label>
+					<select id="tshirt_size" name="tshirt_size">
+						<!--<option value="">&#45;&#45; Choose &#45;&#45;</option>-->
+						<option value="xs" id="tshirt_type_xs" {% if (data.tshirt_size == 'xs') %} selected {% endif %}>XS</option>
+						<option value="s" id="tshirt_type_s" {% if (data.tshirt_size == 's') %} selected {% endif %}>S</option>
+						<option value="m" id="tshirt_type_s" {% if (data.tshirt_size == 'm') %} selected {% endif %}>M</option>
+						<option value="l" id="tshirt_type_l" {% if (data.tshirt_size == 'l') %} selected {% endif %}>L</option>
+						<option value="xl" id="tshirt_type_xl" {% if (data.tshirt_size == 'xl') %} selected {% endif %}>XL</option>
+						<option value="xxl" id="tshirt_type_xxl" {% if (data.tshirt_size == 'xxl') %} selected {% endif %}>XXL</option>
+					</select>
+				</div>
+			</div>
+
 			<div class="row box" id="payment_options">
 				<div class="col-md-12 col-xs-12 field" id="payment_options_field">
 					<label for="payment_options"><p>Payment options<span class="required">*</span></p></label>
-						<label><input name="payment_options[]" type="radio" value="pay_now" {% if (data.payment_options == "pay_now") %} checked {% endif %} required>Pay now (Bank card, PayPal)</label>
-						<label><input name="payment_options[]" type="radio" value="group_invoice" {% if (data.payment_options == "group_invoice") %} checked {% endif %} required>Pay later (group invoice or extra invoice, payment due on receipt by Bank card, PayPal)</label>
+					<label><input name="payment_options[]" type="radio" value="pay_now" {% if (data.payment_options == "pay_now") %} checked {% endif %} required>Pay now (Bank card, PayPal)</label>
+					<label><input name="payment_options[]" type="radio" value="group_invoice" {% if (data.payment_options == "group_invoice") %} checked {% endif %} required>Pay later (group invoice or extra invoice, payment due on receipt by Bank card, PayPal)</label>
 				</div>
 			</div>
 			<div id="group_invoice_fields" style="display: none;">
@@ -346,100 +377,100 @@
 				</div>
 			</div>
 
-				<div class="custom_check">
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_code_of_conduct"><p><input type="checkbox" name="checkbox_code_of_conduct" value="1" id="checkbox_code_of_conduct" {% if (data.checkbox_code_of_conduct == 1) %} checked {% endif %}> I have read the <a href="https://www.tdwg.org/about/code-of-conduct/" target="_blank">Code of Conduct</a> and <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a> and agree to abide by them.<span class="required">*</span></p></label>
-						</div>
-					</div>
-
-
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_presenting"><p><input type="checkbox" name="checkbox_presenting" value="1" id="checkbox_presenting" {% if (data.checkbox_presenting == 1) %} checked {% endif %}> If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube, Twitter and other social media channels.<span class="required">*</span></p></label>
-						</div>
-					</div>
-
-
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_agree"><p><input type="checkbox" name="checkbox_agree" value="1" id="checkbox_agree" {% if (data.checkbox_agree == 1) %} checked {% endif %}> I agree to be contacted by event organizers.<span class="required">*</span></p></label>
-						</div>
-					</div>
-
-
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_media"><p><input type="checkbox" name="checkbox_media" value="1" id="checkbox_media" {% if (data.checkbox_media == 1) %} checked {% endif %}> For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>.<span class="required">*</span> (see <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a>)</p></label>
-						</div>
-					</div>
-
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_received"><p><input type="checkbox" name="checkbox_received" value="1" id="checkbox_received" {% if (data.checkbox_received == 1) %} checked {% endif %}> I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.<span class="required">*</span></p></label>
-						</div>
-					</div>
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_declare"><p><input type="checkbox" name="checkbox_declare" value="1" id="checkbox_declare" {% if (data.checkbox_declare == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.<span class="required">*</span></p></label>
-						</div>
-					</div>
-
-
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_abstract"><p><input type="checkbox" name="checkbox_optional_abstract" value="1" id="checkbox_optional_abstract" {% if (data.checkbox_optional_abstract == 1) %} checked {% endif %}> I plan to submit an abstract.</p></label>
-						</div>
-					</div>
-					<div class="row box hide_for_virtual">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_attend_welcome"><p><input type="checkbox" name="checkbox_optional_attend_welcome" value="1" id="checkbox_optional_attend_welcome" {% if (data.checkbox_optional_attend_welcome == 1) %} checked {% endif %}> I plan to attend the Welcome reception on 16 October 2022 (included in the in-person registration fee).</p></label>
-						</div>
-					</div>
-					<div class="row box hide_for_virtual">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_attend_excursion"><p><input type="checkbox" name="checkbox_optional_attend_excursion" value="1" id="checkbox_optional_attend_excursion" {% if (data.checkbox_optional_attend_excursion == 1) %} checked {% endif %}> I plan to attend the excursion to Rila Monastery on Wednesday 19 October 2022 (included in the in-person registration fee).</p></label>
-						</div>
-					</div>
-					<div class="row box hide_for_virtual">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_attend_conference"><p><input type="checkbox" name="checkbox_optional_attend_conference" value="1" id="checkbox_optional_attend_conference" {% if (data.checkbox_optional_attend_conference == 1) %} checked {% endif %}> I plan to attend the conference banquet on Thursday  20 October 2022 (included in the in-person registration fee).</p></label>
-						</div>
-					</div>
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_contacted"><p><input type="checkbox" name="checkbox_optional_contacted" value="1" id="checkbox_optional_contacted" {% if (data.checkbox_optional_contacted == 1) %} checked {% endif %}> I agree to be contacted by event Supporters post-conference.</p></label>
-						</div>
-					</div>
-					<div class="row box hide_for_virtual">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_understand"><p><input type="checkbox" name="checkbox_optional_understand" value="1" id="checkbox_optional_understand" {% if (data.checkbox_optional_understand == 1) %} checked {% endif %}> I understand the fee for anyone I add to accompany me covers the welcome reception, excursion to Rila monastery and banquet.</p></label>
-						</div>
-					</div>
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_open_session"><p><input type="checkbox" name="checkbox_optional_open_session" value="1" id="checkbox_optional_open_session" {% if (data.checkbox_optional_open_session == 1) %} checked {% endif %}> I'm willing to chair /  moderate a general open session at TDWG2022.</p></label>
-						</div>
-					</div>
-					<div class="row box">
-						<div class="col-md-12 col-xs-12 field">
-							<label for="checkbox_optional_agree_shared"><p><input type="checkbox" name="checkbox_optional_agree_shared" value="1" id="checkbox_optional_agree_shared" {% if (data.checkbox_optional_agree_shared == 1) %} checked {% endif %}> I agree for my name, affiliation, and email to be shared after the conference with other attendees.</p></label>
-						</div>
+			<div class="custom_check">
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_code_of_conduct"><p><input type="checkbox" name="checkbox_code_of_conduct" value="1" id="checkbox_code_of_conduct" {% if (data.checkbox_code_of_conduct == 1) %} checked {% endif %}> I have read the <a href="https://www.tdwg.org/about/code-of-conduct/" target="_blank">Code of Conduct</a> and <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a> and agree to abide by them.<span class="required">*</span></p></label>
 					</div>
 				</div>
 
 
-					<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_presenting"><p><input type="checkbox" name="checkbox_presenting" value="1" id="checkbox_presenting" {% if (data.checkbox_presenting == 1) %} checked {% endif %}> If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube, Twitter and other social media channels.<span class="required">*</span></p></label>
+					</div>
+				</div>
 
-					<div class="row center-xs">
-						<div class="col-xs-12 col-md-3">
-							<!--<input type="submit" name="tAction" value="Preview" class="btn btn-primary">-->
-							<input type="button" name="tAction" value="Preview" class="btn btn-primary" onclick="submitTDWGForm(event);">
-						</div>
+
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_agree"><p><input type="checkbox" name="checkbox_agree" value="1" id="checkbox_agree" {% if (data.checkbox_agree == 1) %} checked {% endif %}> I agree to be contacted by event organizers.<span class="required">*</span></p></label>
+					</div>
+				</div>
+
+
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_media"><p><input type="checkbox" name="checkbox_media" value="1" id="checkbox_media" {% if (data.checkbox_media == 1) %} checked {% endif %}> For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>.<span class="required">*</span> (see <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a>)</p></label>
+					</div>
+				</div>
+
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_received"><p><input type="checkbox" name="checkbox_received" value="1" id="checkbox_received" {% if (data.checkbox_received == 1) %} checked {% endif %}> I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.<span class="required">*</span></p></label>
+					</div>
+				</div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_declare"><p><input type="checkbox" name="checkbox_declare" value="1" id="checkbox_declare" {% if (data.checkbox_declare == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.<span class="required">*</span></p></label>
+					</div>
+				</div>
+
+
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_abstract"><p><input type="checkbox" name="checkbox_optional_abstract" value="1" id="checkbox_optional_abstract" {% if (data.checkbox_optional_abstract == 1) %} checked {% endif %}> I plan to submit an abstract.</p></label>
+					</div>
+				</div>
+				<div class="row box hide_for_virtual">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_attend_welcome"><p><input type="checkbox" name="checkbox_optional_attend_welcome" value="1" id="checkbox_optional_attend_welcome" {% if (data.checkbox_optional_attend_welcome == 1) %} checked {% endif %}> I plan to attend the Welcome reception on 16 October 2022 (included in the in-person registration fee).</p></label>
+					</div>
+				</div>
+				<div class="row box hide_for_virtual">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_attend_excursion"><p><input type="checkbox" name="checkbox_optional_attend_excursion" value="1" id="checkbox_optional_attend_excursion" {% if (data.checkbox_optional_attend_excursion == 1) %} checked {% endif %}> I plan to attend the excursion to Rila Monastery on Wednesday 19 October 2022 (included in the in-person registration fee).</p></label>
+					</div>
+				</div>
+				<div class="row box hide_for_virtual">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_attend_conference"><p><input type="checkbox" name="checkbox_optional_attend_conference" value="1" id="checkbox_optional_attend_conference" {% if (data.checkbox_optional_attend_conference == 1) %} checked {% endif %}> I plan to attend the conference banquet on Thursday  20 October 2022 (included in the in-person registration fee).</p></label>
+					</div>
+				</div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_contacted"><p><input type="checkbox" name="checkbox_optional_contacted" value="1" id="checkbox_optional_contacted" {% if (data.checkbox_optional_contacted == 1) %} checked {% endif %}> I agree to be contacted by event Supporters post-conference.</p></label>
+					</div>
+				</div>
+				<div class="row box hide_for_virtual">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_understand"><p><input type="checkbox" name="checkbox_optional_understand" value="1" id="checkbox_optional_understand" {% if (data.checkbox_optional_understand == 1) %} checked {% endif %}> I understand the fee for anyone I add to accompany me covers the welcome reception, excursion to Rila monastery and banquet.</p></label>
+					</div>
+				</div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_open_session"><p><input type="checkbox" name="checkbox_optional_open_session" value="1" id="checkbox_optional_open_session" {% if (data.checkbox_optional_open_session == 1) %} checked {% endif %}> I'm willing to chair /  moderate a general open session at TDWG2022.</p></label>
+					</div>
+				</div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_optional_agree_shared"><p><input type="checkbox" name="checkbox_optional_agree_shared" value="1" id="checkbox_optional_agree_shared" {% if (data.checkbox_optional_agree_shared == 1) %} checked {% endif %}> I agree for my name, affiliation, and email to be shared after the conference with other attendees.</p></label>
 					</div>
 				</div>
 			</div>
+
+
+			<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+
+			<div class="row center-xs">
+				<div class="col-xs-12 col-md-3">
+					<!--<input type="submit" name="tAction" value="Preview" class="btn btn-primary">-->
+					<input type="button" name="tAction" value="Preview" class="btn btn-primary" onclick="submitTDWGForm(event);">
+				</div>
+			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 
 </form>

@@ -132,3 +132,6 @@
     - 'export to excel'
 1.0.94:
     - 'mail discount code total amount fix'
+1.0.95:
+    - 'added t-shirt fields'
+    - builder_table_update_pensoft_tdwgform_data_25.php

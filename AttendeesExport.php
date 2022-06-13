@@ -46,6 +46,7 @@ class AttendeesExport implements FromCollection, WithHeadingRow, WithHeadings
 			'I understand the fee for anyone I add to accompany me covers the welcome reception, excursion to Rila monastery and banquet.',
 			'I\'m willing to chair /  moderate a general open session at TDWG2022',
 			'I agree for my name, affiliation, and email to be shared after the conference with other attendees',
+			'I want to order a branded TDWG 2022 T-shirt and pay during the conference - 15 EUR',
 		];
 	}
 
