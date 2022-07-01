@@ -397,22 +397,29 @@
 						<label for="checkbox_agree"><p><input type="checkbox" name="checkbox_agree" value="1" id="checkbox_agree" {% if (data.checkbox_agree == 1) %} checked {% endif %}> I agree to be contacted by event organizers.<span class="required">*</span></p></label>
 					</div>
 				</div>
-
-
 				<div class="row box">
 					<div class="col-md-12 col-xs-12 field">
 						<label for="checkbox_media"><p><input type="checkbox" name="checkbox_media" value="1" id="checkbox_media" {% if (data.checkbox_media == 1) %} checked {% endif %}> For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>.<span class="required">*</span> (see <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a>)</p></label>
 					</div>
 				</div>
-
 				<div class="row box">
 					<div class="col-md-12 col-xs-12 field">
-						<label for="checkbox_received"><p><input type="checkbox" name="checkbox_received" value="1" id="checkbox_received" {% if (data.checkbox_received == 1) %} checked {% endif %}> I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.<span class="required">*</span></p></label>
+						<label for="checkbox_declare"><p><input type="checkbox" name="checkbox_declare" value="1" id="checkbox_declare" {% if (data.checkbox_declare == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.<span class="required">*</span></p></label>
+					</div>
+				</div>
+                <div class="row box">
+                    <div class="col-md-12 col-xs-12 field">
+                        <label for="checkbox_received"><p><input type="checkbox" name="checkbox_received" value="1" id="checkbox_received" {% if (data.checkbox_received == 1) %} checked {% endif %}> I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.<span class="required">*</span></p></label>
+                    </div>
+                </div>
+				<div class="row box">
+					<div class="col-md-12 col-xs-12 field">
+						<label for="checkbox_covid"><p><input type="checkbox" name="checkbox_covid" value="1" id="checkbox_covid" {% if (data.checkbox_covid == 1) %} checked {% endif %}> I have received and understood the <a href="https://www.tdwg.org/about/liability-disclaimer/" target="_blank">Liability Disclaimer and Release - COVID-19</a>.<span class="required">*</span></p></label>
 					</div>
 				</div>
 				<div class="row box">
 					<div class="col-md-12 col-xs-12 field">
-						<label for="checkbox_declare"><p><input type="checkbox" name="checkbox_declare" value="1" id="checkbox_declare" {% if (data.checkbox_declare == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.<span class="required">*</span></p></label>
+						<label for="checkbox_account"><p><input type="checkbox" name="checkbox_account" value="1" id="checkbox_account" {% if (data.checkbox_account == 1) %} checked {% endif %}> I hereby declare that I freely give my explicit consent, that my names and email may be used to create an account for me on third party software like Slack and Zoom for the purpose of organizing the conference.<span class="required">*</span></p></label>
 					</div>
 				</div>
 

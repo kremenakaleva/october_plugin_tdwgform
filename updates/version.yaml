@@ -135,3 +135,6 @@
 1.0.95:
     - 'added t-shirt fields'
     - builder_table_update_pensoft_tdwgform_data_25.php
+1.0.96:
+    - 'Updated table pensoft_tdwgform_data'
+    - builder_table_update_pensoft_tdwgform_data_26.php

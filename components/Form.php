@@ -130,6 +130,8 @@ class Form extends ComponentBase {
 		$checkbox_media = \Input::get('checkbox_media');
 		$checkbox_received = \Input::get('checkbox_received');
 		$checkbox_declare = \Input::get('checkbox_declare');
+		$checkbox_covid = \Input::get('checkbox_covid');
+		$checkbox_account = \Input::get('checkbox_account');
 		$checkbox_optional_abstract = \Input::get('checkbox_optional_abstract');
 		$checkbox_optional_attend_welcome = \Input::get('checkbox_optional_attend_welcome');
 		$checkbox_optional_attend_excursion = \Input::get('checkbox_optional_attend_excursion');
@@ -161,6 +163,8 @@ class Form extends ComponentBase {
 				'checkbox_code_of_conduct' => $checkbox_code_of_conduct,
 				'checkbox_presenting' => $checkbox_presenting,
 				'checkbox_agree' => $checkbox_agree,
+				'checkbox_covid' => $checkbox_covid,
+				'checkbox_account' => $checkbox_account,
 				'checkbox_media' => $checkbox_media,
 				'checkbox_received' => $checkbox_received,
 				'checkbox_declare' => $checkbox_declare,
@@ -188,8 +192,10 @@ class Form extends ComponentBase {
 				'checkbox_presenting' => 'required',
 				'checkbox_agree' => 'required',
 				'checkbox_media' => 'required',
+                'checkbox_declare' => 'required',
 				'checkbox_received' => 'required',
-				'checkbox_declare' => 'required',
+                'checkbox_covid' => 'required',
+                'checkbox_account' => 'required',
 				'g-recaptcha-response' => [
 					'required',
 					new RecaptchaValidator(),
@@ -210,8 +216,10 @@ class Form extends ComponentBase {
 			"checkbox_presenting" => "Please check the \"If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube, Twitter and other social media channels\" field.",
 			"checkbox_agree" => "Please check the \"I agree to be contacted by event organizers\" field.",
 			"checkbox_media" => "Please check the \"For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or CC0\" field.",
-			"checkbox_received" => "Please check the \"I have received and understood the privacy information and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time\" field.",
 			"checkbox_declare" => "Please check the \"I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference\" field.",
+            "checkbox_received" => "Please check the \"I have received and understood the privacy information and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time\" field.",
+            "checkbox_covid" => "Please check the \"I have received and understood the Liability Disclaimer and Release - COVID-19\" field.",
+            "checkbox_account" => "Please check the \"I hereby declare that I freely give my explicit consent, that my names and email may be used to create an account for me on third party software like Slack and Zoom for the purpose of organizing the conference\" field.",
 		];
 
 
@@ -329,6 +337,8 @@ class Form extends ComponentBase {
 			$data->checkbox_code_of_conduct = $checkbox_code_of_conduct;
 			$data->checkbox_presenting = $checkbox_presenting;
 			$data->checkbox_agree = $checkbox_agree;
+			$data->checkbox_covid = $checkbox_covid;
+			$data->checkbox_account = $checkbox_account;
 			$data->checkbox_media = $checkbox_media;
 			$data->checkbox_received = $checkbox_received;
 			$data->checkbox_declare = $checkbox_declare;
@@ -524,6 +534,7 @@ class Form extends ComponentBase {
 						return;
 					}
 					return \Redirect::to('/registration-success')->with(['message' => $this->thankYouMessage, 'payment_message' => 'You will be redirected to proceed with your payment ...', 'link' => $link]);
+//					return \Redirect::to('/registration-success')->with(['message' => $this->thankYouMessage, 'payment_message' => 'You will be redirected to proceed with your payment ...', 'link' => '']);
 				}
 			}
 		}
@@ -664,17 +675,17 @@ class Form extends ComponentBase {
 		$html .= ($total) ? '<br><b>Total amount:</b> '.$total.' &euro;' : '';
 
 		$html .= ($data['invoice_email'] && $total > 0) ? ('
-			
+
 			<b>Payment:</b>
 					I need a group invoice or extra invoice, payment due on receipt by Bank card, PayPal
-				
-		
+
+
 					<br><b>List of people who will register and should be added to the same invoice:</b>
 					' . $data['invoice_group_members'] . '
-				
+
 					<br><b>Billing details (company name, VAT number, address, country):</b>
 					' . $data['billing_details'] . '
-				
+
 					<br><b>Send invoice to the following email:</b>
 					' . $data['invoice_email'])
 
@@ -685,8 +696,10 @@ class Form extends ComponentBase {
 		$html .= ($data['checkbox_presenting']) ? '<li>If I am presenting or participating in the conference, I understand the meetings and presentations will be recorded and posted at a future date on the public TDWG YouTube, Twitter and other social media channels.</li>' : '';
 		$html .= ($data['checkbox_agree']) ? '<li>I agree to be contacted by event organizers.</li>' : '';
 		$html .= ($data['checkbox_media']) ? '<li>For any presentation I submit, I am responsible for ensuring all images and media are properly licensed / credited or <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>. (see <a href="https://www.tdwg.org/about/terms-of-use/" target="_blank">Terms of Use</a>)</li>' : '';
-		$html .= ($data['checkbox_received']) ? '<li>I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.</li>' : '';
 		$html .= ($data['checkbox_declare']) ? '<li>I hereby declare that I freely give my explicit consent, that the data collected about me during the registration will be passed to TDWG and Pensoft Publishers for the purpose of organizing the conference.</li>' : '';
+        $html .= ($data['checkbox_received']) ? '<li>I have received and understood the <a href="https://pensoft.net/terms" target="_blank">privacy information</a> and have thus been informed about my rights as a data subject. I will not deduce any rights from this consent (e.g. a fee). I can withdraw my consent at any time.</li>' : '';
+		$html .= ($data['checkbox_covid']) ? '<li>I have received and understood the <a href="https://www.tdwg.org/about/liability-disclaimer/" target="_blank">Liability Disclaimer and Release - COVID-19</a>.</li>' : '';
+		$html .= ($data['checkbox_account']) ? '<li>I hereby declare that I freely give my explicit consent, that my names and email may be used to create an account for me on third party software like Slack and Zoom for the purpose of organizing the conference.</li>' : '';
 		$html .= ($data['checkbox_optional_abstract']) ? '<li>I plan to submit an abstract.</li>' : '';
 		$html .= ($data['checkbox_optional_attend_welcome']) ? '<li>I plan to attend the Welcome reception on 16 October 2022 (included in the in-person registration fee).</li>' : '';
 		$html .= ($data['checkbox_optional_attend_excursion']) ? '<li>I plan to attend the excursion to Rila Monastery on Wednesday 19 October 2022 (included in the in-person registration fee).</li>' : '';
