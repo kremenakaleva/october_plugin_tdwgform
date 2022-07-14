@@ -701,7 +701,7 @@ class Form extends ComponentBase {
 		$html .= ($data['checkbox_covid']) ? '<li>I have received and understood the <a href="https://www.tdwg.org/about/liability-disclaimer/" target="_blank">Liability Disclaimer and Release - COVID-19</a>.</li>' : '';
 		$html .= ($data['checkbox_account']) ? '<li>I hereby declare that I freely give my explicit consent, that my names and email may be used to create an account for me on third party software like Slack and Zoom for the purpose of organizing the conference.</li>' : '';
 		$html .= ($data['checkbox_optional_abstract']) ? '<li>I plan to submit an abstract.</li>' : '';
-		$html .= ($data['checkbox_optional_attend_welcome']) ? '<li>I plan to attend the Welcome reception on 16 October 2022 (included in the in-person registration fee).</li>' : '';
+		$html .= ($data['checkbox_optional_attend_welcome']) ? '<li>I plan to attend the Welcome reception on 16 October 2022, 5-7pm (included in the in-person registration fee).</li>' : '';
 		$html .= ($data['checkbox_optional_attend_excursion']) ? '<li>I plan to attend the excursion to Rila Monastery on Wednesday 19 October 2022 (included in the in-person registration fee).</li>' : '';
 		$html .= ($data['checkbox_optional_attend_conference']) ? '<li>I plan to attend the conference banquet on Thursday  20 October 2022 (included in the in-person registration fee).</li>' : '';
 		$html .= ($data['checkbox_optional_contacted']) ? '<li>I agree to be contacted by event Supporters post-conference.</li>' : '';

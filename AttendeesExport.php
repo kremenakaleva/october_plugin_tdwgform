@@ -39,7 +39,7 @@ class AttendeesExport implements FromCollection, WithHeadingRow, WithHeadings
 			'Twitter',
 			'Email when using Slack or Discord',
 			'I plan to submit an abstract',
-			'I plan to attend the Welcome reception on 16 October 2022',
+			'I plan to attend the Welcome reception on 16 October 2022, 5-7pm',
 			'I plan to attend the excursion to Rila Monastery on Wednesday 19 October 2022',
 			'I plan to attend the conference banquet on Thursday  20 October 2022',
 			'I agree to be contacted by event Supporters post-conference.',
