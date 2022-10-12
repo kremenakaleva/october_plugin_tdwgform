@@ -28,6 +28,7 @@ class AttendeesExport implements FromCollection, WithHeadingRow, WithHeadings
 			'Email',
 			'Phone',
 			'Address',
+			'Country',
 			'Emergency contact',
 			'Comments',
 			'Ticket type',

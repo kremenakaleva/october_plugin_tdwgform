@@ -140,3 +140,5 @@
     - builder_table_update_pensoft_tdwgform_data_26.php
 1.0.97:
     - 'Label change'
+1.0.98:
+    - 'Add country to export'
